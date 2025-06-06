@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shubho Store - Class 10 Study Material</title>
+<style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top:25px;
+      left: 22px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="{{ url_for('home') }}">⬅️ Back to Home</a>
+
+  <style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9fbfd;
+    color: #222;
+    min-height: 300vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: #0077cc;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+  }
+  main {
+    flex: 1;
+    width: 95%;
+    max-width: 1000px;
+    margin: 1rem auto 2rem auto;
+  }
+  </style>
+</head>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .store-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .product-card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      width: 220px;
+      text-align: center;
+      padding: 15px;
+      transition: transform 0.2s;
+    }
+    .product-card:hover {
+      transform: scale(1.05);
+    }
+    .product-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    .product-title {
+      font-size: 16px;
+      margin: 10px 0;
+      color: #34495e;
+    }
+    .buy-button {
+      display: inline-block;
+      padding: 8px 12px;
+      background-color: #27ae60;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .buy-button:hover {
+      background-color: #219150;
+    }
+  </style>
+</head>
+<body>
+
+  <header>SHUBHO-STORE</header>
+  <div class="store-container">
+
+    <!-- Mathematics -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81TITBtA1zL._SY522_.jpg" alt="Oswaal CBSE Question Bank Class 10 Maths">
+      <div class="product-title">Oswaal CBSE Question Bank Class 10 Maths</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwi10tDYvsWNAxX3qmYCHfQiGkwYACICCAEQBRoCc20&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6ipN-7Y8Io_-0e-TYV2ReY4jUbkiIf8MmQfqpE795PbrcfZBahEzeYaAr2pEALw_wcB&ohost=www.google.com&cid=CAESVuD2r-dYssJRgH8g4dLvyJGXP_wmlNi9uD-CgDQgfXUgNamRzVu--5123bDMou7GfQW1xOcVtNkAmTnle3Hx_9ExqNjdFQVLjpzJ80BTS7CE1K_PxYOr&category=acrcp_v1_0&sig=AOD64_1IDpLoFYklHyNvCFNIQYGsiV9sqA&ctype=5&q=&ved=2ahUKEwjHm8rYvsWNAxWERmwGHbx3HoEQ9aACKAB6BAgKEDc&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81g9ux2x8rL._SY522_.jpg" alt="Oswaal CBSE sample papers Class 10 Maths">
+      <div class="product-title">Oswaal CBSE sample papers Class 10 Maths</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwiQtfjBv8WNAxWVqGYCHaNEDU8YACICCAEQCBoCc20&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6j46-ufyjkc1yHDNJFtT2E03q6_X4hLYdsViAw-r11Pe4iGLRs1LW8aAh3WEALw_wcB&ohost=www.google.com&cid=CAESVuD2hh6pnwr9MiixGUkRiWM-zNEbFVZyCnB7yxPJxCXnPMGkV6Wz-e0ELBm7Kh6meSUoATEibGdZHXaNNdRlBnIoWMCc8qwZdFFplLGXCUF_qQD6nzad&category=acrcp_v1_0&sig=AOD64_25kmCK_VzqQ_F6ahctgzmUdArWNQ&ctype=5&q=&ved=2ahUKEwjJxfLBv8WNAxUZV2wGHYtYG6cQ9aACKAB6BAgSEAw&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+
+    <!-- Science -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/816Y3JD+RLL._SY522_.jpg" alt="Oswaal CBSE Question Bank Class 10 Science">
+      <div class="product-title">Oswaal CBSE Question Bank Class 10 Science</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwi8qPqIwMWNAxWmpGYCHVANGvgYACICCAEQBxoCc20&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6gfL1kgNdagOQlSmDXvHyp-EkDR6zGOmo5aX3o5EPZZJmdKm5hH1mYaAkLvEALw_wcB&ohost=www.google.com&cid=CAESVuD2EEMl3Ibkug9DmmFwpN0IsL2xtE2AYY0JTCQMOvd6ya9_7VzxrH2H-BD8AYDYb22eukzeRES4ke3WQVSWj43wBt0L7sEksOHZ9nwUwfhas_zsHqUP&category=acrcp_v1_0&sig=AOD64_3dv9so5wpZkT9Doqs5jMx-rsANAw&ctype=5&q=&ved=2ahUKEwjZ1PWIwMWNAxVKXmwGHfqFCroQ9aACKAB6BAgQEA0&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81fbUdMYT0L._SY522_.jpg" alt="Oswaal CBSE sample papers Class 10 Science">
+      <div class="product-title">Oswaal CBSE sample papers Class 10 Science</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwiYzLnmv8WNAxVPomYCHQF5Ow8YACICCAEQBhoCc20&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6iJzqTie8i593o--MtijGkKLHpeDxovg0S3yvPXhyS7OcmEl8R8aaIaAvsqEALw_wcB&ohost=www.google.com&cid=CAESVuD25FN-KKXIdY1H1ONWZxvCeU460eCGnf2xurDk2E4rXwhMRrA4BQWlpK8XER4d-nyMv2HbTQ6-91VQvuo5WwrzPG9fkmKNbsfcjOg6kE0iCzKnTaHf&category=acrcp_v1_0&sig=AOD64_38-NxnoAV3l10QtfXmK5_enjkheA&ctype=5&q=&ved=2ahUKEwj-gLTmv8WNAxUve2wGHWflJT8Q9aACKAB6BAgKEAw&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+
+    <!-- English -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81-MGevUVhL._SY522_.jpg" alt="Oswaal CBSE Question Bank Class 10 English">
+      <div class="product-title">Oswaal CBSE Question Bank Class 10 English</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwi9rLu7wMWNAxXc0TwCHQDJMDQYACICCAEQAxoCc2Y&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6hK8str0b5h0WHnIk4CM618ghf_pzmwoIEE1GUFekPd4Zgq1c3s-agaAl5XEALw_wcB&ohost=www.google.com&cid=CAESVuD20FUQDr64tnVd2wOQvP6msfj91XP33KjHeUGsOnW2av0euYDkZGHrv1AL2oxbxMtjKXghgPpImYSf4AAkDOw9urmFo8wJrT5FUcjcsD9O5gd94smv&category=acrcp_v1_0&sig=AOD64_3JOhBerpwHKNbY6ULdcSL5GPz2fA&ctype=5&q=&ved=2ahUKEwjKm7a7wMWNAxVjXWwGHejePMMQ9aACKAB6BAgJEA4&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/8159AUqN1GL._SY522_.jpg" alt="Oswaal CBSE sample papers Class 10 English">
+      <div class="product-title">Oswaal CBSE sample papers Class 10 English</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwi3h5CHwcWNAxWBr0sFHV7SGo8YACICCAEQChoCc2Y&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6gauW9d98wg1JPV3GgS4oXC5j0s3HmIXl367KWi6_vtsWH808gRoZoaAq85EALw_wcB&ohost=www.google.com&cid=CAESVuD2o7ghZSFvOLzSdW_-612ip7sskZp8Zk6Nix9RIBX8ma_GFiF_6enlx5xu5YZMl54qW5VvO7BlASxakLXhvN95swFNZftMtEfBIYooFzeDvQLbSK4J&category=acrcp_v1_0&sig=AOD64_2B63tV25pjIz5of-ghGghYLmecjA&ctype=5&q=&ved=2ahUKEwjb2IqHwcWNAxVgZWwGHbAqJkoQ9aACKAB6BAgSEAw&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+
+    <!-- Social Science -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81vp9Zfag4L._SY522_.jpg" alt="Oswaal CBSE Question Bank Class 10 Social Science">
+      <div class="product-title">Oswaal CBSE Question Bank Class 10 Social Science</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwja06DLwcWNAxUdC4MDHW4jKVEYACICCAEQBhoCc2Y&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6hrZWutw6dJbOeNbg08oDt6yQqjQWSkzOIRqxnuCfWn22PoY0lMRlUaAlz5EALw_wcB&ohost=www.google.com&cid=CAESVuD2nkbYBQ7zM_bPn5zM5y_b4aKYO9R1xurCQAdzCpZZx8Pt4vjm2w5qqR_ll3ZYH832DknkPUqmmeaQmAcVrtH6AmfzXEuWQAeRCGbg6CndxTx76-dn&category=acrcp_v1_0&sig=AOD64_1kEGc-8DnZLX2VtMnyaJoBCpsgkA&ctype=5&q=&ved=2ahUKEwiIsZvLwcWNAxXWT2wGHf3vOPAQ9aACKAB6BAgPEA8&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81-pCGYyd3L._SY522_.jpg" alt="Oswaal CBSE sample papers Class 10  social Science">
+      <div class="product-title">Oswaal CBSE sample papers Class 10 social Science</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwi8qP2jwcWNAxW_pGYCHfKbObkYACICCAEQBhoCc20&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6hKreNseRioB9C2y9XlUVm4shfh6gH2MbPuQ8MQKePMom4JE5Vs9McaApO9EALw_wcB&ohost=www.google.com&cid=CAESVuD2Jm0JUYOWGbolqQrrCwABKdtwJkJd1pWwShW2OTeQ51mjwN6ZqB3qaJyaEE3_0SzFZ_Op2ksHhsSD2oV6KkuIXAifGc8jju4qygKN1_yZ-wgMVcxz&category=acrcp_v1_0&sig=AOD64_17cicovzTKzou-Y2eq8CjCok1JIg&ctype=5&q=&ved=2ahUKEwi18PejwcWNAxVsR2wGHeq0Mp4Q9aACKAB6BAgKEAw&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+
+    <!-- Hindi -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81WiuQMvPbL._SY522_.jpg" alt="Oswaal CBSE Question Bank Class 10 Hindi">
+      <div class="product-title">Oswaal CBSE Question Bank Class 10 Hindi</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwj9mLrlwcWNAxVGqWYCHc1SGHQYACICCAEQBxoCc20&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6jeqbVa8y_7apjnXeC9d6w81ec-lWymHHXoSoZGWZBO2p5P0B3TH4EaAqrjEALw_wcB&ohost=www.google.com&cid=CAESVuD2AX2tYLb6RriewEwciOVSncoeq8LY28EfCEC2iosA27hFeZ5S_9uUdrXbtC42FVd2-gbrmCxZWWcCem2zsWEEZalYfFbOmGwWHDnaI4AbK2lkjA1A&category=acrcp_v1_0&sig=AOD64_01zP30NOb-SMLCcWeA9bLQUmMMZg&ctype=5&q=&ved=2ahUKEwiahbXlwcWNAxXUR2wGHQ8JOUkQ9aACKAB6BAgKEA0&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81VOK10hbzL._SY522_.jpg" alt="Oswaal CBSE sample papers Class 10 Hindi">
+      <div class="product-title">Oswaal CBSE sample papers Class 10 Hindi</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwju8e-FwsWNAxU8GYMDHe7fJ_MYACICCAEQCRoCc2Y&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6jEEtI2gc_3BhIxoF-v-9JIN1Xq449eSRIzEmxQQYO1AB2ZQT7Rl50aAknOEALw_wcB&ohost=www.google.com&cid=CAESVuD2hHV9jCKhwivf9UyLEl_ZTccIqxq4CwzQx78XhlYW8bP1EXG9pJIPAUXLChYJAG3SZ2ztvnFWIpuLJPu9KjmjcZ3TkfjksYN_KmGUfmXYJzDQ15KY&category=acrcp_v1_0&sig=AOD64_0nEj5hD7kYPD0et_2XsvLZcwuxOg&ctype=5&q=&ved=2ahUKEwiQyOqFwsWNAxXWUGwGHRAtBuQQ9aACKAB6BAgLEAw&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+    <!-- Sanskrit -->
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81l34doaOCL._SY522_.jpg" alt="Oswaal CBSE Question Bank Class 10 Sanskrit">
+      <div class="product-title">Oswaal CBSE Question Bank Class 10 Sanskrit</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwjhoevNwsWNAxXno2YCHQzfF-wYACICCAEQAhoCc20&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6hGCH52yNuEx4xQ6hb-j_wM3Z6MogrjS_qkL9Xkw15jyw9latMlqTcaAtQ0EALw_wcB&ohost=www.google.com&cid=CAESVuD2Gnrxabcntx4DrGHB58d2nEvv7tcOyZyBK53VmnQ7Kvah_e97ZxPjKyOFZW7tr9D0vQMGlr6sr_pCFSyEgnAt1m1ih4oq6MC8LHCpTBw_v7BXJDoj&category=acrcp_v1_0&sig=AOD64_2JMqCgqPOiHd5sfgHPgdB8VGxjWg&ctype=5&q=&ved=2ahUKEwif8OXNwsWNAxVdUGwGHZ-vNMoQ9aACKAB6BAgLEA4&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81ZhrDyEtVL._SY522_.jpg" alt="Oswaal CBSE sample papers Class 10 Sanskrit">
+      <div class="product-title">Oswaal CBSE sample papers Class 10 Science</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwiK4_anwsWNAxV1pWYCHUwxKbgYACICCAEQCBoCc20&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6gRmORzBiyGiQ64javw9agOcc8rsSpIpJbTvUAeIbC3S3HJe5LrPo0aAsm6EALw_wcB&ohost=www.google.com&cid=CAESVuD2JJ46r36xJe62OYR7LgkRq-Js7ZMyQ0T2tFKuOopgc-yRB3WjQQ-HrSHm_hSCiWVcDpMHi_eJWDGRhFyxZ8ed3iStK0JKK7oW4-27bJgrRJ6qNlQY&category=acrcp_v1_0&sig=AOD64_0zM9sNO7-k1RtbUE5AKi7vG5sR_A&ctype=5&q=&ved=2ahUKEwi72vCnwsWNAxUpTGwGHVVpAAAQ9aACKAB6BAgKEAw&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+    <!-- all in one -->
+
+    <div class="product-card">
+      <img src="https://oswaalbooks.com/cdn/shop/files/cbse-question-bank-class-10-set-of-2-books-maths-standard-science-chapterwise-topicwise-solved-papers-for-2026-board-exams-1169158142_1024x1024.png?v=1748330414" alt="Oswaal CBSE practise papers Class 10 all in one">
+      <div class="product-title">Oswaal CBSE practice papers Class 10 all in one</div>
+      <a href="https://oswaalbooks.com/products/cbse-question-bank-class-10-set-of-2-books-maths-standard-science-chapterwise-topicwise-solved-papers-for-2026-board-exams" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+    <div class="product-card">
+      <img src="https://oswaalbooks.com/cdn/shop/files/CBSE-25-Combined-Sample-Question-papers-Class-10-Books-Science_-Mathematics-Standard_-Social-Science_-English-Language-and-Literature_-Hindi-A-_For-2025-Exam_-Oswaal-Books-and-Learnin_1024x1024.jpg?v=1748244038" alt="Oswaal CBSE practise sample papers Class 10 all in one">
+      <div class="product-title">Oswaal CBSE practice sample papers Class 10 all in one</div>
+      <a href="https://oswaalbooks.com/products/cbse-25-combined-sample-question-papers-class-10-books-science-mathematics-standard-social-science-english-language-and-literature-hindi-a-for-2025-exam" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81KygoECY8L._SY522_.jpg" alt="Oswaal CBSE practise PYQs Class 10 all in one">
+      <div class="product-title">Oswaal CBSE practice PYQs Class 10 all in one</div>
+      <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChsSEwj4ysuKw8WNAxVEHoMDHRvcFcwYACICCAEQBhoCc2Y&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6jxV2diDjeYwsMMXByC4m6FSscpj6g3wVXr90dSKqMwZc70LNDzsYAaAvU1EALw_wcB&ohost=www.google.com&cid=CAESVuD2qh5Uucx55zrMJvkrF0O_WKTT1ypcMTfQgjLwEKdIMIeHlsB7HF0cPmujprxzdOVZHSRNwmnSSKTTLxRGELuXScZKfYF0iZbsBWEWllPCTDVN8Cgf&category=acrcp_v1_0&sig=AOD64_1QLe0djPATpYLsOmVidxJ6FUcczA&ctype=5&q=&ved=2ahUKEwjzp8SKw8WNAxUwUGwGHYweFZsQ9aACKAB6BAgIEDI&adurl=" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+    
+  </div>
+
+</body>
+</html>

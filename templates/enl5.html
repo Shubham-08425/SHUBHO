@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 mcq Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="enmcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 ENGLISH Quiz - ADVANCE Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+     {
+      question: `In “A Letter to God,” what is the irony in the ending of the story?`,
+      options: [
+        "The letter reaches the wrong person",
+        "The money sent was stolen",
+        "The old man’s faith contrasts the harsh reality",
+        "The house is unharmed"
+      ],
+      answer: 2,
+      explanation: "The irony is that despite the old man’s strong faith in God, the reality is harsh because the house is damaged."
+    },
+    {
+      question: `In “The Necklace,” why is the ending considered ironic?`,
+      options: [
+        "The necklace was fake",
+        "Madame Loisel becomes rich",
+        "Madame Loisel loses her family",
+        "Madame Loisel never finds the necklace"
+      ],
+      answer: 0,
+      explanation: "Madame Loisel suffers for years paying for a necklace that was actually fake, highlighting situational irony."
+    },
+    {
+      question: `What is the main theme of the poem “The Road Not Taken”?`,
+      options: [
+        "Adventure",
+        "Decision making and consequences",
+        "Nature",
+        "Friendship"
+      ],
+      answer: 1,
+      explanation: "The poem emphasizes the impact of choices and the consequences that follow."
+    },
+    {
+      question: `In “The Last Leaf,” what does the leaf symbolize?`,
+      options: [
+        "Hope and survival",
+        "Autumn",
+        "Loneliness",
+        "Freedom"
+      ],
+      answer: 0,
+      explanation: "The last leaf symbolizes hope and the will to survive despite illness."
+    },
+    {
+      question: `What is the tone of “A Triumph of Surgery”?`,
+      options: [
+        "Serious and sad",
+        "Humorous and light-hearted",
+        "Angry and harsh",
+        "Fearful"
+      ],
+      answer: 1,
+      explanation: "The story uses humor to describe the surgery and the pet’s behavior."
+    },
+    {
+      question: `In “The Duck and the Kangaroo,” what do the two animals represent?`,
+      options: [
+        "Different species competing",
+        "Freedom and confinement",
+        "Desire for change and exploration",
+        "Conflict and resolution"
+      ],
+      answer: 2,
+      explanation: "The animals represent the desire to explore and experience new things."
+    },
+    {
+      question: `In “A House is Not a Home,” what does the phrase imply?`,
+      options: [
+        "Houses are useless",
+        "A home is where love is present",
+        "Houses are expensive",
+        "Home and house are the same"
+      ],
+      answer: 1,
+      explanation: "A home means a place filled with love, not just a physical building."
+    },
+    {
+      question: `What is the central conflict in “Two Stories About Flying”?`,
+      options: [
+        "Man vs Nature",
+        "Man vs Man",
+        "Human limitation vs aspiration",
+        "Man vs Technology"
+      ],
+      answer: 2,
+      explanation: "The stories depict man's aspiration to fly despite limitations."
+    },
+    {
+      question: `What does the invisible man’s invisibility symbolize in “Footprints Without Feet”?`,
+      options: [
+        "Power and anonymity",
+        "Punishment and isolation",
+        "Science and discovery",
+        "Freedom and escape"
+      ],
+      answer: 1,
+      explanation: "Invisibility isolates the man from society, symbolizing punishment."
+    },
+    {
+      question: `In “The Tale of Custard the Dragon,” what lesson is learned about bravery?`,
+      options: [
+        "Bravery is physical strength",
+        "Bravery can be quiet and surprising",
+        "Only heroes are brave",
+        "Bravery is foolishness"
+      ],
+      answer: 1,
+      explanation: "True bravery sometimes lies hidden, like Custard’s courage."
+    },
+    {
+      question: `What is the main idea behind “For Anne Gregory”?`,
+      options: [
+        "Romantic love is superficial",
+        "True love is spiritual and unconditional",
+        "Physical beauty matters most",
+        "Love is a game"
+      ],
+      answer: 1,
+      explanation: "The poem states that true love is beyond physical appearance."
+    },
+    {
+      question: `In “Amanda!”, what conflict does Amanda face?`,
+      options: [
+        "Between childhood innocence and adult responsibilities",
+        "Between school and friends",
+        "Between freedom and parental control",
+        "Between truth and lies"
+      ],
+      answer: 2,
+      explanation: "Amanda struggles with parental control limiting her freedom."
+    },
+    {
+      question: `How does the poem “Dust of Snow” portray change?`,
+      options: [
+        "As sudden and shocking",
+        "As subtle but life-changing",
+        "As unwanted",
+        "As frightening"
+      ],
+      answer: 1,
+      explanation: "A small change, like snow falling, can improve a bad mood."
+    },
+    {
+      question: `In “The Making of a Scientist,” how did Ebright’s curiosity impact his life?`,
+      options: [
+        "It distracted him from studies",
+        "It led to major scientific discoveries",
+        "It was unimportant",
+        "It caused problems at school"
+      ],
+      answer: 1,
+      explanation: "His curiosity helped him make important discoveries."
+    },
+    {
+      question: `What message does “The Midnight Visitor” convey about courage?`,
+      options: [
+        "Courage means fighting",
+        "Intelligence is a form of courage",
+        "Only soldiers are courageous",
+        "Courage is luck"
+      ],
+      answer: 1,
+      explanation: "The story shows intelligence and calm as true courage."
+    },
+    {
+      question: `What role does nature play in “Fog”?`,
+      options: [
+        "Hostile force",
+        "Gentle, mysterious presence",
+        "Destroyer",
+        "Unimportant"
+      ],
+      answer: 1,
+      explanation: "Fog is depicted as a soft, mysterious visitor."
+    },
+    {
+      question: `What does the character Bholi’s transformation represent?`,
+      options: [
+        "Superficial beauty",
+        "Empowerment through education",
+        "Marriage success",
+        "Rebellion"
+      ],
+      answer: 1,
+      explanation: "Bholi gains confidence and empowerment through learning."
+    },
+    {
+      question: `What irony is found in “The Hack Driver”?`,
+      options: [
+        "The driver is poor",
+        "The driver is a criminal",
+        "The driver turns out to be the man the narrator was looking for",
+        "The driver cheats the narrator"
+      ],
+      answer: 2,
+      explanation: "The driver unexpectedly turns out to be the person the narrator sought."
+    },
+    {
+      question: `What does the phrase “The Ball Poem” symbolize?`,
+      options: [
+        "Childhood innocence lost",
+        "Winning a game",
+        "Getting a prize",
+        "Sportsmanship"
+      ],
+      answer: 0,
+      explanation: "Losing the ball symbolizes losing innocence and learning about loss."
+    },
+    {
+      question: `What lesson can be drawn from “Nelson Mandela: Long Walk to Freedom”?`,
+      options: [
+        "Revenge is necessary for justice",
+        "Peace and forgiveness lead to freedom",
+        "Violence is the only solution",
+        "Freedom is impossible"
+      ],
+      answer: 1,
+      explanation: "Mandela teaches that peace and forgiveness are key to freedom."
+    }
+   
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

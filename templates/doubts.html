@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SHUBHO- AI Doubt Solver</title>
+    <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 35px;
+      left:30px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="{{ url_for('home') }}">⬅️ Back to Home</a>
+<style>
+header {
+    background: #0077cc;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+  }
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #f1e83d;
+        }
+        textarea {
+            width: 900px;
+            height: 300px;
+            font-size: 16px;
+            padding: 10px;
+        }
+        
+        button {
+            padding: 20px 20px;
+            margin-top: 10px;
+            background-color: #2906ee;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+         button:hover {
+      background-color: #d90a0a;
+    }
+        #answerBox {
+            margin-top: 20px;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #d89191;
+        }
+    </style>
+</head>
+<header>SHUBHO-AI DOUBT SOLVER</header>
+<body>
+    <h2>Ask Your Doubt Below ⬇️</h2>
+    <textarea id="doubtInput" placeholder="Type your doubt here..."></textarea>
+    <br>
+    <button onclick="askDoubt()">Get Answer</button>
+
+    <div id="answerBox"></div>
+
+    <script>
+        async function askDoubt() {
+            const question = document.getElementById("doubtInput").value;
+            document.getElementById("answerBox").innerHTML = "⏳ Solving...";
+
+            const response = await fetch("/solve", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ question })
+            });
+
+            const data = await response.json();
+            document.getElementById("answerBox").innerHTML = `<b>Answer:</b><br>${data.answer}`;
+        }
+    </script>
+</body>
+</html>

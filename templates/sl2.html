@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 Science Tough Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="smcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 Science Quiz -EASY Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+  {
+        question: " Which of the following is correct for the decomposition of lead nitrate?",
+        options: [
+          "It is an exothermic reaction with gas release",
+          "It produces brown gas and residue",
+          "No color change is observed",
+          "Only oxygen is released"
+        ],
+        answer: 1
+      },
+      {
+        question: " Assertion (A): The image formed by a concave mirror can be real and inverted.<br> Reason (R): Concave mirrors always form virtual images.",
+        options: [
+          "Both A and R are true, R explains A",
+          "Both A and R are true, R doesn't explain A",
+          "A is true, R is false",
+          "A is false, R is true"
+        ],
+        answer: 2
+      },
+      {
+        question: " In the reactivity series, the displacement of copper from copper sulphate by which metal confirms the series?",
+        options: ["Silver", "Gold", "Iron", "Mercury"],
+        answer: 2
+      },
+      {
+        question: " In which of the following cases will the resistance of a wire double?",
+        options: [
+          "Length is halved and area doubled",
+          "Length is doubled and area halved",
+          "Both length and area are halved",
+          "Both length and area are doubled"
+        ],
+        answer: 1
+      },
+      {
+        question: " The current flowing through a 5Ω resistor connected to 10V battery is:",
+        options: ["0.5 A", "2 A", "5 A", "50 A"],
+        answer: 1
+      },
+      {
+        question: " Which of the following shows a displacement reaction?",
+        options: [
+          "NaOH + HCl → NaCl + H₂O",
+          "AgNO₃ + NaCl → AgCl + NaNO₃",
+          "Zn + CuSO₄ → ZnSO₄ + Cu",
+          "C + O₂ → CO₂"
+        ],
+        answer: 2
+      },
+      {
+        question: " Which of the following is used in the Galvanization process?",
+        options: ["Copper", "Aluminium", "Zinc", "Silver"],
+        answer: 2
+      },
+      {
+        question: " The focal length of a lens is +10 cm. Identify the lens type and its nature:",
+        options: [
+          "Convex, converging",
+          "Concave, diverging",
+          "Convex, diverging",
+          "Concave, converging"
+        ],
+        answer: 0
+      },
+      {
+        question: " An object is placed 20 cm in front of a concave mirror with focal length 10 cm. The image formed is:",
+        options: [
+          "Virtual, erect, and magnified",
+          "Real, inverted, and same size",
+          "Real, inverted, and magnified",
+          "Virtual and diminished"
+        ],
+        answer: 2
+      },
+      {
+        question: " What is the function of baking soda in antacid tablets?",
+        options: [
+          "To neutralize stomach base",
+          "To neutralize acid",
+          "To increase acidity",
+          "To promote digestion"
+        ],
+        answer: 1
+      },
+      {
+        question: " Which of the following diagrams represents magnetic field lines around a bar magnet?",
+        options: [
+          "Lines emerge from N and end at S",
+          "Lines emerge from S and end at N",
+          "Lines form straight paths",
+          "Lines are random and broken"
+        ],
+        answer: 0
+      },
+      {
+        question: " Which component is used to protect the circuit from overload?",
+        options: ["Resistor", "Capacitor", "Fuse", "Transformer"],
+        answer: 2
+      },
+      {
+        question: " What is the resistance of a wire if 6 A current flows through it under 12 V?",
+        options: ["1 ohm", "2 ohm", "0.5 ohm", "3 ohm"],
+        answer: 1
+      },
+      {
+        question: " How much energy does a 60W bulb consume in 10 hours?",
+        options: ["600 J", "6000 J", "216000 J", "600000 J"],
+        answer: 2
+      },
+      {
+        question: " Which of the following is biodegradable?",
+        options: ["Plastic", "Aluminium foil", "Paper", "Styrofoam"],
+        answer: 2
+      },
+      {
+        question: " Which of the following can undergo anaerobic respiration?",
+        options: ["Yeast", "Human muscle during sleep", "Plants", "Cockroach"],
+        answer: 0
+      },
+      {
+        question: "In which part of nephron does filtration occur?",
+        options: ["Loop of Henle", "Glomerulus", "Collecting duct", "Ureter"],
+        answer: 1
+      },
+      {
+        question: " Mendel’s law of independent assortment is observed in which condition?",
+        options: [
+          "Monohybrid cross",
+          "Dihybrid cross",
+          "Self-pollination",
+          "Cross between two tall plants"
+        ],
+        answer: 1
+      },
+      {
+        question: " Which hormone is responsible for phototropism?",
+        options: ["Gibberellin", "Ethylene", "Auxin", "Cytokinin"],
+        answer: 2
+      },
+      {
+        question: " The power of a lens is -4D. What is its focal length?",
+        options: ["+25 cm", "-25 cm", "+4 cm", "-4 cm"],
+        answer: 1
+      }    
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

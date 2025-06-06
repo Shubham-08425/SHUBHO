@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shubho</title>
+<title>Modern Study App</title>
+<header>SHUBHO-Study App</header>
+<style>
+    /* Exit Button */
+    .exit-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 10px 18px;
+      background-color: #0ff702;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    .exit-button:hover {
+      background-color: #e60000;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 15% auto;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .modal-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .yes-btn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .yes-btn:hover {
+      background-color: #218838;
+    }
+
+    .no-btn {
+      background-color: #ffc107;
+      color: black;
+    }
+
+    .no-btn:hover {
+      background-color: #e0a800;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Exit Button -->
+  <button class="exit-button" onclick="showModal()">❌EXIT</button>
+
+  <!-- Confirmation Modal -->
+  <div class="modal" id="exitModal">
+    <div class="modal-content">
+      <h2>Do you really want to leave the app?</h2>
+      <div class="modal-buttons">
+        <button class="yes-btn" onclick="exitApp()">Yes</button>
+        <button class="no-btn" onclick="cancelExit()">No</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showModal() {
+      document.getElementById('exitModal').style.display = 'block';
+    }
+
+    function cancelExit() {
+      document.getElementById('exitModal').style.display = 'none';
+      // Redirect to homepage or another page if needed:
+      window.location.href = "/logo"; // Change to your actual home page
+    }
+
+    function exitApp() {
+      // Redirect to exit page or close the app
+      window.location.href = "https://www.google.com"; // Replace with your desired exit URL
+    }
+  </script>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9fbfd;
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: #0077cc;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+  }
+  main {
+    flex: 1;
+    width: 95%;
+    max-width: 1000px;
+    margin: 1rem auto 2rem auto;
+  }
+  /* Grid container for features */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 20px;
+  }
+  /* Feature card */
+  .feature-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+    padding: 1.3rem 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+  }
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgb(0 0 0 / 0.15);
+  }
+  .feature-icon {
+    font-size: 3.2rem;
+    margin-bottom: 0.7rem;
+    color: #0077cc;
+  }
+  .feature-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .feature-desc {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  /* Content below grid */
+  #feature-content {
+    margin-top: 2rem;
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    min-height: 280px;
+  }
+
+  /* Sections inside feature content */
+  .content-section {
+    display: none;
+  }
+  .content-section.active {
+    display: block;
+  }
+
+  /* Notes list styling */
+  ul#notes-list {
+    list-style: none;
+    margin-top: 1rem;
+  }
+  ul#notes-list li {
+    margin-bottom: 0.7rem;
+  }
+  ul#notes-list li a {
+    background: #0077cc;
+    color: white;
+    padding: 0.5rem 0.9rem;
+    border-radius: 7px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 600;
+    transition: background-colour 0.3s ease;
+  }
+  ul#notes-list li a:hover {
+    background: #005fa3;
+  }
+
+  /* Video container */
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+    margin-top: 1rem;
+  }
+  .video-container iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    border: none;
+  }
+
+  /* Quiz styling */
+  #quiz-container {
+    margin-top: 1rem;
+  }
+  .quiz-question {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  .quiz-options label {
+    display: block;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .quiz-options input[type="radio"] {
+    margin-right: 0.5rem;
+  }
+  #submit-quiz {
+    margin-top: 1rem;
+  }
+  #quiz-result {
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  /* Doubts section */
+  #doubts-text {
+    width: 100%;
+    min-height: 90px;
+    padding: 0.7rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  #submit-doubts {
+    margin-top: 0.8rem;
+  }
+  #doubts-list {
+    margin-top: 1rem;
+    list-style: none;
+  }
+  #doubts-list li {
+    background: #e6f0ff;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+  }
+
+  /* Auth form */
+  #auth-form {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  #auth-form input {
+    width: 100%;
+    padding: 0.7rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  #auth-message {
+    margin-top: 1rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* Feedback form */
+  #feedback-form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  #feedback-form textarea {
+    width: 100%;
+    min-height: 90px;
+    padding: 0.7rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  #feedback-form input[type="text"], #feedback-form input[type="email"] {
+    width: 100%;
+    padding: 0.7rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  #feedback-submit {
+    margin-top: 0.5rem;
+  }
+
+  /* Shubho Store */
+  #store-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .store-item {
+    background: #f5faff;
+    border-radius: 12px;
+    padding: 1rem;
+    width: 140px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgb(0 0 0 / 0.1);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  .store-item:hover {
+    box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
+  }
+  .store-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 0.6rem;
+  }
+  .store-item h4 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .store-item p {
+    font-size: 0.85rem;
+    color: #555;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+<body>
+<main>
+  <div class="features-grid" id="features-grid">
+    <div class="feature-card" data-feature="notes">
+      <div class="feature-icon">📚</div>
+      <div class="feature-title">Notes & PDFs</div>
+      <div class="feature-desc">Download & read study notes</div>
+      <a href="/notes">Notes</a>
+    </div>
+    <div class="feature-card" data-feature="videos">
+      <div class="feature-icon">🎥</div>
+      <div class="feature-title">Video Lectures</div>
+      <div class="feature-desc">Watch video tutorials</div>
+      <a href="/video">VIDEO</a>
+    </div>
+    <div class="feature-card" data-feature="quiz">
+      <div class="feature-icon">⏱️</div>
+      <div class="feature-title">MCQ Quiz</div>
+      <div class="feature-desc">Practice multiple choice questions</div>
+      <a href="/obj">MCQ QUIZE</a>
+    </div>
+    <div class="feature-card" data-feature="doubts">
+      <div class="feature-icon">❓</div>
+      <div class="feature-title">Doubt Solving</div>
+      <div class="feature-desc">Ask and review doubts</div>
+      <a href="/doubts"> DOUBTS</a>
+    </div>
+    <div class="feature-card" data-feature="dpp">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title">DPP (Daily Practice)</div>
+      <div class="feature-desc">Daily problem practice papers</div>
+      <a href="/dpp">DPP</a>
+    </div>
+    <div class="feature-card" data-feature="pyq">
+      <div class="feature-icon">📜</div>
+      <div class="feature-title">PYQs (Previous Year)</div>
+      <div class="feature-desc">Previous years' question papers</div>
+      <a href="/pyqs">PYQs</a>
+    </div>
+    <div class="feature-card" data-feature="comptency">
+      <div class="feature-icon">💡</div>
+      <div class="feature-title">HOTS (Board foccussed)</div>
+      <div class="feature-desc">Board oriented papers</div>
+      <a href="/hots">HOTS</a>
+    </div>
+    <div class="feature-card" data-feature="diagram">
+      <div class="feature-icon">🫀</div>
+      <div class="feature-title">diagramatic representation</div>
+      <div class="feature-desc">Diagram based Questions</div>
+      <a href="/mindmap">DIAGRAM & MIND MAP SERIES</a>
+    </div>
+    <div class="feature-card" data-feature="ncert">
+      <div class="feature-icon">📖</div>
+      <div class="feature-title">NCERT</div>
+      <div class="feature-desc"> latest NCERT book pdfs </div>
+      <a href="/ncert">NCERT</a>
+    </div>
+    <div class="feature-card" data-feature="feedback">
+      <div class="feature-icon">💬</div>
+      <div class="feature-title">Feedback</div>
+      <div class="feature-desc">Send your feedback</div>
+      <a href="/feedback">FEEDBACK FORM</a>
+    </div>
+    <div class="feature-card" data-feature="store">
+      <div class="feature-icon">🛒</div>
+      <div class="feature-title">Shubho Store</div>
+      <div class="feature-desc">Explore study materials & merch</div>
+      <a href="/store">STORE</a>
+    </div>
+    <div class="feature-card" data-feature="login">
+      <div class="feature-icon">🔐</div>
+      <div class="feature-title">Login / Signup</div>
+      <div class="feature-desc">Access your account</div>
+      <a href="/security">lOGIN FORM</a>
+  </div>
+</main>
+
+<script>
+  const featuresGrid = document.getElementById("features-grid");
+  const featureContent = document.getElementById("feature-content");
+
+  // Data for notes
+  const notesData = [
+    { id: 1, title: "Physics Chapter 1", url: "https://example.com/physics1.pdf" },
+    { id: 2, title: "Math Notes", url: "https://example.com/math.pdf" },
+    { id: 3, title: "Chemistry Basics", url: "https://example.com/chem.pdf" },
+  ];
+
+  // Data for DPP
+  const dppData = [
+    { id: 1, title: "DPP - Physics Week 1", url: "https://example.com/dpp-physics1.pdf" },
+    { id: 2, title: "DPP - Math Week 1", url: "https://example.com/dpp-math1.pdf" },
+  ];
+
+  // Data for PYQ
+  const pyqData = [
+    { id: 1, title: "PYQ - Physics 2024", url: "https://example.com/pyq-physics2024.pdf" },
+    { id: 2, title: "PYQ - Chemistry 2024", url: "https://example.com/pyq-chemistry2024.pdf" },
+  ];
+
+  // Store items
+  const storeItems = [
+    { id: 1, title: "Physics Textbook", desc: "High quality textbook", img: "https://via.placeholder.com/140x100?text=Physics+Book" },
+    { id: 2, title: "Math Workbook", desc: "Practice exercises", img: "https://via.placeholder.com/140x100?text=Math+Workbook" },
+    { id: 3, title: "Chemistry Flashcards", desc: "Quick revision cards", img: "https://via.placeholder.com/140x100?text=Chem+Flashcards" },
+  ];
+</script>
+
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+  footer {
+    background: #484646;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.0rem;
+    font-weight: 200;
+    text-align: center;
+  }
+  main {
+    flex: 1;
+    width: 95%;
+    max-width: 1000px;
+    margin: 1rem auto 2rem auto;
+  } 
+</style>
+  
+<footer><h4>@ All copy Right reserved for 2025. This is a study app made by -SHUBHAM SONI & SHUBHO- TEAM.
+SHUBHO-MODERN STUDY APP Will help you to improve the performance of an average student to become a topper student.it is a free offline and online app with better features available which help a 10th class student in their self study.
+you can give rating ⭐⭐⭐⭐⭐ to my app as you wish. </h4></footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+    

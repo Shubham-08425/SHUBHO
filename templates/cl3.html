@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 mcq Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="cmcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 civics-tough Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+   {
+        question: " Which of the following is NOT a feature of federalism?",
+        options: ["Division of powers between levels of government", "Rigid constitution", "Independent judiciary", "Centralized decision making"],
+        answer: 3
+      },
+      {
+        question: " Which level of government in India can make laws on subjects in the Concurrent List?",
+        options: ["Only Central Government", "Only State Governments", "Both Central and State Governments", "Only Panchayats"],
+        answer: 2
+      },
+      {
+        question: " Which community is NOT recognized as a minority by the Indian Constitution?",
+        options: ["Parsis", "Jains", "Hindus in Punjab", "Christians in Kerala"],
+        answer: 0
+      },
+      {
+        question: " What was the major outcome of the Civil Rights Movement in the USA?",
+        options: ["Right to vote for women", "End of racial discrimination", "Independence from Britain", "Ban on alcohol"],
+        answer: 1
+      },
+      {
+        question: " Assertion (A): India is a secular state. Reason (R): Indian state treats all religions equally.",
+        options: ["A is true, R is true, R explains A", "A is true, R is true, R does not explain A", "A is true, R is false", "A is false, R is true"],
+        answer: 0
+      },
+      {
+        question: " Which institution in India resolves conflicts between Centre and States?",
+        options: ["Parliament", "Supreme Court", "President", "NITI Aayog"],
+        answer: 1
+      },
+      {
+        question: " The idea of decentralization is closely related to:",
+        options: ["Dictatorship", "Democracy", "Aristocracy", "Monarchy"],
+        answer: 1
+      },
+      {
+        question: " What is the significance of the 73rd Constitutional Amendment?",
+        options: ["Introduction of GST", "Formation of Panchayati Raj", "Right to Education", "Creation of Lokpal"],
+        answer: 1
+      },
+      {
+        question: " Which one of the following statements about Belgium is true?",
+        options: ["Dutch speakers were majority and held power", "Power was equally shared among communities", "French speakers dominated politics", "Only German speakers had autonomy"],
+        answer: 1
+      },
+      {
+        question: " What does the term 'secularism' mean in Indian context?",
+        options: ["No religion allowed", "Promotion of major religion", "Equal respect for all religions", "State religion is Hinduism"],
+        answer: 2
+      },
+      {
+        question: " Which body conducts elections to Panchayati Raj institutions?",
+        options: ["Election Commission of India", "President", "State Election Commission", "Governor"],
+        answer: 2
+      },
+      {
+        question: " What is the key difference between unitary and federal systems?",
+        options: ["Unitary has one level of government", "Federal has no constitution", "Unitary allows state autonomy", "Federal gives power to Parliament only"],
+        answer: 0
+      },
+      {
+        question: " Which one of the following rights is NOT part of Right to Equality?",
+        options: ["Equality before law", "Equal access to public places", "Abolition of untouchability", "Right to vote"],
+        answer: 3
+      },
+      {
+        question: " What role do pressure groups play in democracy?",
+        options: ["Weaken elections", "Enhance dictatorship", "Bridge between government and citizens", "Control judiciary"],
+        answer: 2
+      },
+      {
+        question: " How does power-sharing reduce conflict in a country?",
+        options: ["By suppressing minorities", "By ignoring local demands", "By distributing power among groups", "By strengthening military"],
+        answer: 2
+      },
+      {
+        question: " What is the main purpose of forming linguistic states?",
+        options: ["For religious identity", "For administrative convenience", "For cultural uniformity", "For economic development only"],
+        answer: 1
+      },
+      {
+        question: " What is coalition government?",
+        options: ["Government formed by one party", "Government of military rule", "Government formed by alliance of parties", "Judiciary-run government"],
+        answer: 2
+      },
+      {
+        question: " Which of these is NOT a condition for successful democracy?",
+        options: ["Free and fair elections", "Active participation", "Military rule", "Rule of law"],
+        answer: 2
+      },
+      {
+        question: " What is the role of an independent judiciary in democracy?",
+        options: ["Support ruling party", "Implement government policies", "Resolve disputes impartially", "Follow instructions of ministers"],
+        answer: 2
+      },
+      {
+        question: " Why was Sri Lanka’s majoritarian policy problematic?",
+        options: ["It helped all communities", "It ignored Sinhalas", "It favored Tamils", "It denied rights to minorities"],
+        answer: 3
+      } 
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

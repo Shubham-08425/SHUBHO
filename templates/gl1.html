@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 mcq Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="gmcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 GEOGRAPHY Quiz -EASY Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+   {
+    question: "Which soil type is most suitable for the cultivation of rice in India and why?",
+    options: [
+      "Black soil because it retains moisture",
+      "Alluvial soil due to its fertility and good water retention",
+      "Red soil because it is rich in iron",
+      "Laterite soil as it is porous and drains well"
+    ],
+    answer: 1,
+    explanation: "Alluvial soil is fertile and retains moisture, making it ideal for water-intensive crops like rice."
+  },
+  {
+    question: "What causes the seasonal reversal of wind direction in the Indian subcontinent?",
+    options: [
+      "Earth's rotation",
+      "Difference in temperature and pressure between land and sea",
+      "Polar jet streams",
+      "Presence of Himalayan mountains"
+    ],
+    answer: 1,
+    explanation: "The monsoon winds reverse due to temperature and pressure differences between the heated land and cooler sea."
+  },
+  {
+    question: "Which factors contribute to the formation of the Thar Desert in India?",
+    options: [
+      "High rainfall and fertile soil",
+      "Rain shadow effect and high temperature",
+      "Dense forest cover and moderate rainfall",
+      "Proximity to the sea and fertile plains"
+    ],
+    answer: 1,
+    explanation: "The Thar Desert is formed due to rain shadow effect and high temperature causing arid conditions."
+  },
+  {
+    question: "Why is the Western Ghats considered a biodiversity hotspot?",
+    options: [
+      "It has dense deserts and arid regions",
+      "It has unique and endemic species due to varied climate and altitude",
+      "It receives no rainfall",
+      "It is covered entirely by snow"
+    ],
+    answer: 1,
+    explanation: "Western Ghats have diverse climates and elevations leading to many unique species found nowhere else."
+  },
+  {
+    question: "Which of the following rivers is primarily rain-fed and has seasonal flow?",
+    options: [
+      "Ganga",
+      "Brahmaputra",
+      "Narmada",
+      "Luni"
+    ],
+    answer: 3,
+    explanation: "Luni is a seasonal river mainly dependent on monsoon rainfall and dries up in summers."
+  },
+  {
+    question: "How do the Himalayas affect the climate of the Indian subcontinent?",
+    options: [
+      "They cause extreme dryness in the north",
+      "They block cold central Asian winds, protecting India from extreme cold",
+      "They cause heavy rainfall on the leeward side",
+      "They reduce the monsoon rains"
+    ],
+    answer: 1,
+    explanation: "The Himalayas act as a barrier against cold winds from Central Asia, keeping India warmer in winter."
+  },
+  {
+    question: "Why is India’s coastline vulnerable to cyclones?",
+    options: [
+      "Due to high mountains near the coast",
+      "Because of the long coastline along warm seas prone to storms",
+      "Due to cold ocean currents",
+      "Because it is landlocked"
+    ],
+    answer: 1,
+    explanation: "India’s long coastline along the warm Bay of Bengal and Arabian Sea makes it prone to cyclones."
+  },
+  {
+    question: "Which soil conservation method is effective in the Himalayan region to prevent landslides?",
+    options: [
+      "Contour ploughing",
+      "Terrace farming",
+      "Strip cropping",
+      "Deforestation"
+    ],
+    answer: 1,
+    explanation: "Terrace farming reduces runoff and soil erosion on steep slopes, preventing landslides."
+  },
+  {
+    question: "What is the significance of the Indo-Gangetic Plain for agriculture?",
+    options: [
+      "It is poor in fertility",
+      "It provides fertile alluvial soil and abundant water resources",
+      "It has rocky and hilly terrain",
+      "It has sparse population"
+    ],
+    answer: 1,
+    explanation: "The Indo-Gangetic Plain has rich alluvial soil and rivers that support extensive agriculture."
+  },
+  {
+    question: "Which of the following best explains the formation of delta regions?",
+    options: [
+      "Deposition of sediments at river mouth due to decreased velocity",
+      "Erosion caused by fast flowing rivers",
+      "Volcanic activity near the coast",
+      "Strong sea currents washing away sediments"
+    ],
+    answer: 0,
+    explanation: "Deltas form by deposition of sediments when a river slows down as it meets a sea or ocean."
+  },
+  {
+    question: "Why is the Indian monsoon considered a complex climatic phenomenon?",
+    options: [
+      "Because it depends on only the Arabian Sea",
+      "Because it involves seasonal wind reversal, interaction of land, sea, and mountains",
+      "Because it is a constant dry wind",
+      "Because it occurs only once in 5 years"
+    ],
+    answer: 1,
+    explanation: "The monsoon results from complex interaction of land heating, ocean currents, wind patterns, and mountain ranges."
+  },
+  {
+    question: "Which factors influence the distribution of population in India?",
+    options: [
+      "Climate, availability of water, and soil fertility",
+      "Only economic factors",
+      "Only political stability",
+      "None of the above"
+    ],
+    answer: 0,
+    explanation: "Population distribution depends on physical and economic factors like climate, water availability, and fertile land."
+  },
+  {
+    question: "How do tropical cyclones affect the eastern coast of India?",
+    options: [
+      "They bring drought conditions",
+      "They cause heavy rainfall, flooding, and damage to coastal areas",
+      "They increase agricultural productivity",
+      "They reduce humidity levels"
+    ],
+    answer: 1,
+    explanation: "Tropical cyclones bring strong winds and heavy rains, causing flooding and destruction along the eastern coast."
+  },
+  {
+    question: "What is the impact of deforestation in the Western Ghats?",
+    options: [
+      "Increase in soil fertility",
+      "Loss of biodiversity and increase in soil erosion",
+      "Improved rainfall patterns",
+      "Increase in forest area"
+    ],
+    answer: 1,
+    explanation: "Deforestation leads to habitat loss, reduced biodiversity, and makes soil prone to erosion."
+  },
+  {
+    question: "Which of the following crops is NOT a Kharif crop in India?",
+    options: [
+      "Rice",
+      "Cotton",
+      "Wheat",
+      "Maize"
+    ],
+    answer: 2,
+    explanation: "Wheat is a Rabi crop grown in winter; others are Kharif crops grown in monsoon."
+  },
+  {
+    question: "Why is the Deccan Plateau less fertile compared to the Indo-Gangetic plain?",
+    options: [
+      "Because of laterite and black soil, which are less fertile than alluvial soil",
+      "Due to heavy flooding",
+      "Because of excessive rainfall",
+      "Because of volcanic soil"
+    ],
+    answer: 0,
+    explanation: "Deccan Plateau has harder, less fertile soils compared to the rich alluvial soil of the Indo-Gangetic plain."
+  },
+  {
+    question: "What role do mangroves play in coastal ecology?",
+    options: [
+      "They prevent coastal erosion and provide habitat for marine life",
+      "They increase desertification",
+      "They cause flooding",
+      "They reduce oxygen levels in water"
+    ],
+    answer: 0,
+    explanation: "Mangroves stabilize coastline, reduce erosion, and support diverse marine ecosystems."
+  },
+  {
+    question: "Which is the major source of irrigation in India?",
+    options: [
+      "Canals",
+      "Wells and tube wells",
+      "Rainwater harvesting",
+      "Tanks"
+    ],
+    answer: 1,
+    explanation: "Wells and tube wells are the primary irrigation sources due to availability of groundwater."
+  },
+  {
+    question: "What causes the formation of deserts like Rajasthan?",
+    options: [
+      "High rainfall throughout the year",
+      "Rain shadow effect, high temperature, and scanty rainfall",
+      "Proximity to seas",
+      "Dense forest cover"
+    ],
+    answer: 1,
+    explanation: "Rajasthan desert formed due to rain shadow effect by Aravalli hills and high temperatures limiting rainfall."
+  },
+  {
+    question: "How does urbanization affect land use in India?",
+    options: [
+      "Increase in agricultural land",
+      "Conversion of agricultural and forest land into residential and industrial areas",
+      "Increase in forest cover",
+      "Reduction in population density"
+    ],
+    answer: 1,
+    explanation: "Urban growth leads to reduction in agricultural land as land is converted for housing and industries."
+  }   
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

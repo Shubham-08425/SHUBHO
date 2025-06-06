@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 MCQ Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="mmcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 MATHS Quiz -EASY Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+  {
+        question: " The value of \\(\\sqrt{144}\\) is:",
+        options: ["10", "11", "12", "13"],
+        correct: 2,
+        explanation: "The square root of 144 is 12."
+      },
+      {
+        question: " If \\(x + 3 = 7\\), then \\(x\\) is:",
+        options: ["4", "5", "6", "3"],
+        correct: 0,
+        explanation: "Subtract 3 from both sides: x = 7 - 3 = 4."
+      },
+      {
+        question: " The slope of the line \\(y = 2x + 3\\) is:",
+        options: ["2", "3", "1", "0"],
+        correct: 0,
+        explanation: "The coefficient of x in the equation y = mx + c is slope m = 2."
+      },
+      {
+        question: "The roots of equation \\(x^2 - 5x + 6 = 0\\) are:",
+        options: ["2 and 3", "1 and 6", "3 and 4", "2 and 4"],
+        correct: 0,
+        explanation: "Factoring: (x - 2)(x - 3) = 0, roots are 2 and 3."
+      },
+      {
+        question: " The area of a circle with radius 7 cm is:",
+        options: ["154 cm²", "44 cm²", "38.5 cm²", "49 cm²"],
+        correct: 0,
+        explanation: "Area = πr² = 3.14 × 7 × 7 = 153.86 ≈ 154 cm²."
+      },
+      {
+        question: " The length of the diagonal of a square of side 10 cm is:",
+        options: ["10√2 cm", "20 cm", "10 cm", "5√2 cm"],
+        correct: 0,
+        explanation: "Diagonal = side × √2 = 10 × √2 cm."
+      },
+      {
+        question: " Simplify \\(\\frac{2}{3} + \\frac{3}{4}\\):",
+        options: ["\\(\\frac{17}{12}\\)", "\\(\\frac{5}{7}\\)", "\\(\\frac{1}{12}\\)", "\\(\\frac{10}{12}\\)"],
+        correct: 0,
+        explanation: "LCM of 3 and 4 is 12. So, \\(\\frac{8}{12} + \\frac{9}{12} = \\frac{17}{12}\\)."
+      },
+      {
+        question: " The HCF of 36 and 48 is:",
+        options: ["12", "6", "18", "24"],
+        correct: 0,
+        explanation: "Prime factors: 36 = 2² × 3²; 48 = 2⁴ × 3. HCF = 2² × 3 = 12."
+      },
+      {
+        question: " The sum of interior angles of a hexagon is:",
+        options: ["720°", "540°", "360°", "600°"],
+        correct: 0,
+        explanation: "Sum = (n-2) × 180° = (6-2) ×180 = 720°."
+      },
+      {
+        question: " Solve for x: \\(2x - 3 = 7\\)",
+        options: ["5", "7", "10", "3"],
+        correct: 0,
+        explanation: "2x = 10 → x = 5."
+      },
+      {
+        question: " Find the value of \\(k\\) if the points (2,3), (4,k), (6,7) are collinear.",
+        options: ["5", "6", "7", "8"],
+        correct: 0,
+        explanation: "Slope between (2,3) and (6,7) = (7-3)/(6-2) = 1.\nSet slope between (4,k) and (2,3) equal to 1:\n(k-3)/(4-2) = 1 => k -3 = 2 => k=5."
+      },
+      {
+        question: " If \\(\\sin A = \\frac{3}{5}\\), find \\(\\cos A\\) (A in first quadrant).",
+        options: ["\\(\\frac{4}{5}\\)", "\\(\\frac{5}{3}\\)", "\\(\\frac{3}{4}\\)", "\\(\\frac{1}{2}\\)"],
+        correct: 0,
+        explanation: "Using \\(\\sin^2 A + \\cos^2 A = 1\\), \\(\\cos A = \\sqrt{1 - (3/5)^2} = 4/5\\)."
+      },
+      {
+        question: " The distance between points (3,4) and (7,1) is:",
+        options: ["5", "6", "7", "8"],
+        correct: 0,
+        explanation: "Distance = \\(\\sqrt{(7-3)^2 + (1-4)^2} = \\sqrt{16 + 9} = 5\\)."
+      },
+      {
+        question: "The sum of the first 10 natural numbers is:",
+        options: ["55", "45", "65", "50"],
+        correct: 0,
+        explanation: "Sum = \\(\\frac{n(n+1)}{2} = \\frac{10 × 11}{2} = 55\\)."
+      },
+      {
+        question: " The area of a triangle with base 10 cm and height 6 cm is:",
+        options: ["30 cm²", "60 cm²", "16 cm²", "10 cm²"],
+        correct: 0,
+        explanation: "Area = \\(\\frac{1}{2} × base × height = \\frac{1}{2} × 10 × 6 = 30\\) cm²."
+      },
+      {
+        question: ` The sum of the squares of two numbers is 100. If the square of their difference is 36, find the product of the two numbers.`,
+        options: ["28", "32", "34", "36"],
+        correct: 1,
+        explanation: `Given: x² + y² = 100 and (x - y)² = 36
+
+Expand (x - y)²: x² - 2xy + y² = 36
+
+Substitute x² + y² = 100:
+100 - 2xy = 36
+2xy = 64
+xy = 32
+
+Answer: 32.`
+      },
+      {
+        question: ` Find the number of ways to arrange the letters of the word 'STATISTICS' so that the vowels always come together.`,
+        options: ["43200", "4320", "3360", "1260"],
+        correct: 2,
+        explanation: `Letters in STATISTICS: S(3), T(3), A(1), I(2), C(1)
+Vowels = A, I, I grouped as one block.
+
+Number of letters considering vowel block as one unit = 8 (S(3), T(3), C(1), Vowel block(1))
+
+Arrangements = 8!/(3!3!) = 1120
+
+Arrangements within vowel block = 3!/2! = 3
+
+Total = 1120 × 3 = 3360`
+      },
+      {
+        question: ` If f(x) = ax² + bx + c passes through points (1,4), (2,9), and (3,16), find a + b + c.`,
+        options: ["4", "6", "7", "8"],
+        correct: 0,
+        explanation: `Using points:
+(1,4): a + b + c = 4
+(2,9): 4a + 2b + c = 9
+(3,16): 9a + 3b + c = 16
+
+Subtract (1) from (2):
+(4a - a) + (2b - b) + (c - c) = 9 - 4
+3a + b = 5  ---(i)
+
+Subtract (2) from (3):
+(9a - 4a) + (3b - 2b) + (c - c) = 16 - 9
+5a + b = 7  ---(ii)
+
+Subtract (i) from (ii):
+(5a - 3a) + (b - b) = 7 - 5
+2a = 2 ⇒ a = 1
+
+Put a=1 in (i):
+3(1) + b = 5 ⇒ b = 2
+
+Put a=1, b=2 in (1):
+1 + 2 + c = 4 ⇒ c = 1
+
+Find a + b + c = 1 + 2 + 1 = 4.`
+      },
+      {
+        question: ` If the circumference of a circle is 44 cm, find its radius.`,
+        options: ["7 cm", "14 cm", "11 cm", "22 cm"],
+        correct: 0,
+        explanation: `Circumference = 2πr = 44
+r = 44 / (2 × 3.14) = 7 cm (approx).`
+      },
+      {
+        question: ` The quadratic equation whose roots are 3 and -5 is:`,
+        options: ["x² + 2x - 15 = 0", "x² - 2x - 15 = 0", "x² + 8x + 15 = 0", "x² - 8x + 15 = 0"],
+        correct: 0,
+        explanation: `If roots are α = 3, β = -5,
+Sum = α + β = -2
+Product = α × β = -15
+Quadratic eqn: x² - (sum)x + product = 0
+=> x² - (-2)x + (-15) = x² + 2x - 15 = 0.`
+      }     
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

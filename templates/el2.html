@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 mcq Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="emcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 Economics Quiz-MEDIUM Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+{
+    question: " Which sector contributes the most to India's GDP in recent years?",
+    options: ["Primary", "Secondary", "Tertiary", "Quaternary"],
+    answer: "Tertiary",
+    explanation: "The service sector or tertiary sector contributes the most to India’s GDP due to rapid growth in IT, banking, and transport services."
+  },
+  {
+    question: " MGNREGA guarantees how many days of employment per year to rural households?",
+    options: ["100", "150", "120", "90"],
+    answer: "100",
+    explanation: "MGNREGA guarantees 100 days of wage employment to every rural household in a financial year."
+  },
+  {
+    question: " Disguised unemployment is mostly found in which sector?",
+    options: ["Agriculture", "Construction", "IT", "Manufacturing"],
+    answer: "Agriculture",
+    explanation: "In agriculture, more people work than needed, contributing no extra output — a feature of disguised unemployment."
+  },
+  {
+    question: " Which of the following is NOT a feature of organized sector?",
+    options: ["Fixed working hours", "Paid holidays", "Job insecurity", "Social security benefits"],
+    answer: "Job insecurity",
+    explanation: "Organized sector provides job security and social benefits unlike the unorganized sector."
+  },
+  {
+    question: " The minimum wages are fixed by:",
+    options: ["Union Government", "State Governments", "Supreme Court", "Trade Unions"],
+    answer: "State Governments",
+    explanation: "Minimum wages are decided by individual state governments based on local conditions."
+  },
+  {
+    question: " Which indicator is most commonly used to compare economic development of countries?",
+    options: ["GDP", "HDI", "Per Capita Income", "GNP"],
+    answer: "Per Capita Income",
+    explanation: "Per capita income is a widely used indicator for comparing economic well-being across nations."
+  },
+  {
+    question: " In which state is infant mortality rate the lowest as per recent government data?",
+    options: ["Kerala", "Bihar", "Madhya Pradesh", "Odisha"],
+    answer: "Kerala",
+    explanation: "Kerala has the lowest infant mortality rate due to its better healthcare and education system."
+  },
+  {
+    question: " What is the main criterion used by the World Bank to classify countries?",
+    options: ["Population", "Per capita income", "GDP", "Literacy rate"],
+    answer: "Per capita income",
+    explanation: "World Bank uses per capita income as a key criterion to classify countries into high, middle, or low income."
+  },
+  {
+    question: " Which country is the largest producer of milk in the world?",
+    options: ["USA", "China", "India", "Brazil"],
+    answer: "India",
+    explanation: "India ranks first in milk production due to its extensive dairy farming sector."
+  },
+  {
+    question: " Which organisation publishes Human Development Index?",
+    options: ["World Bank", "IMF", "UNDP", "WTO"],
+    answer: "UNDP",
+    explanation: "The United Nations Development Programme (UNDP) publishes the HDI report annually."
+  },
+  {
+    question: " What do you mean by 'underemployment'?",
+    options: ["No job", "Working part-time", "Overqualified for the job", "All of these"],
+    answer: "All of these",
+    explanation: "Underemployment includes part-time work, overqualification, and skills not being fully utilized."
+  },
+  {
+    question: " Which sector is also called the service sector?",
+    options: ["Primary", "Tertiary", "Secondary", "Informal"],
+    answer: "Tertiary",
+    explanation: "The tertiary sector includes services like banking, transport, healthcare — hence called service sector."
+  },
+  {
+    question: " Which programme aims to provide universal elementary education?",
+    options: ["PMGSY", "Sarva Shiksha Abhiyan", "NRHM", "MID DAY MEAL"],
+    answer: "Sarva Shiksha Abhiyan",
+    explanation: "Sarva Shiksha Abhiyan was launched to achieve universalization of elementary education."
+  },
+  {
+    question: " What does the term 'GDP' stand for?",
+    options: ["Gross Domestic Product", "Global Domestic Price", "Government Debt Payment", "Gross Development Plan"],
+    answer: "Gross Domestic Product",
+    explanation: "GDP is the total value of goods and services produced within a country during a year."
+  },
+  {
+    question: " Which state has the highest literacy rate in India?",
+    options: ["Kerala", "Tamil Nadu", "Delhi", "Goa"],
+    answer: "Kerala",
+    explanation: "Kerala has maintained the highest literacy rate in India due to effective education policies."
+  },
+  {
+    question: " What is the main cause of unemployment in India?",
+    options: ["Population growth", "Lack of skills", "Low industrial growth", "All of the above"],
+    answer: "All of the above",
+    explanation: "Unemployment is caused by multiple factors including overpopulation and lack of industrial opportunities."
+  },
+  {
+    question: " Which one is an example of public sector enterprise?",
+    options: ["Tata Motors", "Infosys", "ONGC", "Reliance"],
+    answer: "ONGC",
+    explanation: "ONGC (Oil and Natural Gas Corporation) is owned and operated by the government."
+  },
+  {
+    question: " What is the objective of 'Skill India Mission'?",
+    options: ["Education for all", "Job creation", "Provide free skills training", "Reduce corruption"],
+    answer: "Provide free skills training",
+    explanation: "Skill India aims to train people in various skills and make them employable."
+  },
+  {
+    question: "Which of the following is a part of Human Development Index?",
+    options: ["Health", "Education", "Standard of living", "All of the above"],
+    answer: "All of the above",
+    explanation: "HDI is based on three dimensions — health, education, and standard of living."
+  },
+  {
+    question: " Which scheme aims to provide food at subsidized rates to poor?",
+    options: ["MNREGA", "PDS", "PMAY", "NSAP"],
+    answer: "PDS",
+    explanation: "Public Distribution System (PDS) provides food grains at lower prices to economically weaker sections."
+  }    
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

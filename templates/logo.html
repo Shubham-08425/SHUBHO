@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shubho Logo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+  body, html {
+    height: 100%;
+    margin: 0;
+    background-color: #00ff1a; /* fresh green background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo {
+    width: 250px;
+    height: 250px;
+    background: #b201fe; /* deep purple */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(239, 6, 6);
+    font-family: 'Pacifico', cursive;
+    font-size: 4rem;
+    font-weight: 400;
+    box-shadow:
+      0 0 15px 5px rgb(255, 0, 174),
+      0 0 30px 10px rgb(255, 30, 0);
+    user-select: none;
+    text-shadow: 2px 2px 4px rgb(255, 247, 0);
+  }
+</style>
+<script>
+  // After 3 seconds, redirect to new page
+  setTimeout(() => {
+    window.location.href ="/index"; // <-- Change this URL to your desired page
+  }, 3000);
+</script>
+</head>
+<body>
+  <div class="logo">Shubho</div>
+</body>
+</html>

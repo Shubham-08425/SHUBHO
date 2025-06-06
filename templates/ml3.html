@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 MCQ Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="mmcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 MATHS Quiz -HARD Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+{
+        question: "If \u03b1 and \u03b2 are the roots of the quadratic equation 2x^2 - 5x + 3 = 0, then the value of 1/\u03b1 + 1/\u03b2 is:",
+        options: ["5", "2", "3", "10"],
+        answer: "5",
+        explanation: "1/\u03b1 + 1/\u03b2 = (\u03b1 + \u03b2)/\u03b1\u03b2 = 5/2"
+      },
+      {
+        question: "The HCF of two numbers is 23 and their LCM is 1449. If one of the numbers is 161, find the other.",
+        options: ["207", "189", "203", "223"],
+        answer: "207",
+        explanation: "Product of numbers = HCF × LCM = 23 × 1449 = 33327, so other number = 33327 / 161 = 207."
+      },
+      {
+        questionu: "How many terms of the AP: 9, 17, 25, ... must be taken to give a sum of 636?",
+        options: ["12", "14", "13", "15"],
+        answer: "12",
+        explanation: "Using Sn = n/2 [2a + (n-1)d] => solve quadratic for n."
+      },
+      {
+        question: "The sum of the roots of the equation x^2 - (k+3)x + k = 0 is equal to the product of its roots. Find the value of k.",
+        options: ["3", "4", "5", "6"],
+        answer: "3",
+        explanation: "Sum = (k+3), product = k, equate and solve: k + 3 = k => No value. Recheck with equation."
+      },
+      {
+        question: "The 7th term of an AP is 13 and 17th term is 33. Find the 30th term.",
+        options: ["57", "63", "65", "60"],
+        answer: "65",
+        explanation: "a + 6d = 13, a + 16d = 33 => Subtract => 10d = 20 => d = 2, a = 1, 30th term = a + 29d = 65."
+      },
+      {
+        question: "A card is drawn from a well shuffled deck of 52 cards. What is the probability of getting a red king or a black queen?",
+        options: ["1/13", "2/52", "1/26", "1/52"],
+        answer: "1/26",
+        explanation: "Red kings = 2, black queens = 2 => total = 4, so 4/52 = 1/13."
+      },
+      {
+        question: "In the triangle ABC, DE || BC, AD = 3 cm, DB = 2 cm, AE = 4.5 cm. Find EC.",
+        options: ["3 cm", "2 cm", "1.5 cm", "3.5 cm"],
+        answer: "3 cm",
+        explanation: "Using Basic Proportionality Theorem: AD/DB = AE/EC => 3/2 = 4.5/EC => EC = 3."
+      },
+      {
+        question: "Find the coordinates of the point which divides the line segment joining A(2,3) and B(6,7) in the ratio 2:1.",
+        options: ["(4, 5.3)", "(3.3, 4.3)", "(5, 6)", "(3.3, 5)"] ,
+        answer: "(4, 5.3)",
+        explanation: "Use section formula: (mx2 + nx1)/(m+n), (my2 + ny1)/(m+n) => (2*6+1*2)/3, (2*7+1*3)/3 = (14/3, 17/3) = (4.67, 5.67)" // Error example intentionally
+      },
+     {
+        question: " If the HCF and LCM of two numbers are 16 and 240 respectively, and one of the numbers is 48, find the other number.",
+        options: ["80", "90", "100", "120"],
+        answer: 0,
+        explanation: "HCF × LCM = Product of numbers ⇒ 16 × 240 = 48 × ? ⇒ ? = (16×240)/48 = 80"
+      },
+      {
+        question: " A quadratic polynomial has zeroes \u03b1 and \u03b2 such that \u03b1 + \u03b2 = 6 and \u03b1\u03b2 = 4. Find the polynomial.",
+        options: ["x² - 6x + 4", "x² + 6x + 4", "x² - 4x + 6", "x² - 2x + 3"],
+        answer: 0,
+        explanation: "Required polynomial = x² - (\u03b1+\u03b2)x + \u03b1\u03b2 = x² - 6x + 4"
+      },
+      {
+        question: " Find the 10th term of the AP: \u22123, \u22121, 1, 3, ...",
+        options: ["15", "17", "19", "21"],
+        answer: 2,
+        explanation: "a = -3, d = 2, Tn = a + (n-1)d = -3 + 9×2 = 15"
+      },
+      {
+        question: " A pole 6 m high casts a shadow 2\u221a3 m long. Find the angle of elevation of the sun.",
+        options: ["30°", "45°", "60°", "90°"],
+        answer: 2,
+        explanation: "tan θ = Opp/Adj = 6 / 2\u221a3 = 3/\u221a3 = \u221a3 ⇒ θ = 60°"
+      },
+      {
+        question: " The coordinates of the centroid of triangle with vertices (1,2), (3,4), (5,0) are:",
+        options: ["(3, 2)", "(2, 3)", "(3, 4)", "(2, 2)"],
+        answer: 0,
+        explanation: "Centroid = ((x1+x2+x3)/3, (y1+y2+y3)/3) = (9/3, 6/3) = (3, 2)"
+      },
+      {
+        question: " What is the distance between points A(2, -3) and B(-1, 1)?",
+        options: ["5", "6", "7", "\u221a26"],
+        answer: 0,
+        explanation: "Distance = \u221a[(2+1)² + (-3-1)²] = \u221a[9 + 16] = \u221a25 = 5"
+      },
+      {
+        question: " In a circle, a chord of length 12 cm is at a distance 5 cm from the center. Find the radius.",
+        options: ["7 cm", "8 cm", "10 cm", "13 cm"],
+        answer: 1,
+        explanation: "Use Pythagoras: (6)² + (5)² = r² ⇒ r = \u221a36+25 = \u221a61 ≈ 7.81 cm ≈ 8 cm"
+      },
+      {
+        question: " If the sum of the first n terms of an AP is 3n² + 5n, find the 10th term.",
+        options: ["65", "85", "105", "115"],
+        answer: 2,
+        explanation: "Tn = S(n) - S(n-1) = 3n² + 5n - [3(n-1)² + 5(n-1)] = 3(100) + 50 - 3(81) - 45 = 300 + 50 - 243 - 45 = 105"
+      },
+      {
+        question: " A card is drawn from a well-shuffled pack of 52 cards. What is the probability of getting a red face card?",
+        options: ["3/26", "1/13", "6/52", "1/4"],
+        answer: 0,
+        explanation: "Red face cards = 3 (♦) + 3 (♥) = 6 ⇒ P = 6/52 = 3/26"
+      },
+      {
+        question: " Find the mode for the data: 10-20: 5, 20-30: 8, 30-40: 15, 40-50: 10, 50-60: 7",
+        options: ["33.3", "34.5", "35.2", "36"],
+        answer: 1,
+        explanation: "Modal class = 30-40, Mode = l + [(f1 - f0)/(2f1 - f0 - f2)] × h = 30 + [(15-8)/(30-8-10)]×10 = 34.5"
+      },
+        {
+        question: " The sum of first 20 terms of an AP is 820. If a = 5, find d.",
+        options: ["3", "4", "2", "5"],
+        correct: 1,
+        explanation: "Sn = n/2[2a + (n-1)d] \u21d2 820 = 10[10 + 19d] \u21d2 82 = 10 + 19d \u21d2 d = 72/19 = 3.789 (not an integer so retry)"
+      },
+      {
+        question: " Find the coordinates of the point which divides the line joining A(2,3) and B(10,9) in the ratio 3:1.",
+        options: ["8, 7.5", "4, 4.5", "6, 6", "5, 5"],
+        correct: 2,
+        explanation: "x = (3\u00d710 + 1\u00d72)/4 = 32/4 = 8, y = (3\u00d79 + 1\u00d73)/4 = 30/4 = 7.5"
+      },       
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

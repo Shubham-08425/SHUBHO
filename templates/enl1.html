@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 mcq Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="enmcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 ENGLISH Quiz - EASY Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+  {
+        question: "In 'A Letter to God', what does Lencho compare the raindrops to?",
+        options: ["Silver coins", "Pearls", "New flowers", "God’s blessings"],
+        answer: 0,
+        explanation: "Lencho compares the raindrops to silver coins, symbolizing hope and prosperity."
+      },
+      {
+        question: "What literary device is used in the line: 'He walks like a giant in the land of dwarfs'?",
+        options: ["Simile", "Metaphor", "Alliteration", "Irony"],
+        answer: 0,
+        explanation: "The comparison using 'like' makes it a simile."
+      },
+      {
+        question: "In 'The Hack Driver', who was actually the hack driver?",
+        options: ["A farmer", "A lawyer", "Oliver Lutkins", "A judge"],
+        answer: 2,
+        explanation: "Oliver Lutkins himself was pretending to help while actually misleading the narrator."
+      },
+      {
+        question: "What was the real reason of the convict’s transformation in 'The Bishop’s Candlesticks'?",
+        options: ["Fear of death", "Love shown by the Bishop", "Hunger", "Prison trauma"],
+        answer: 1,
+        explanation: "The Bishop’s compassion and forgiveness inspired the convict to change."
+      },
+      {
+        question: "In ‘Dust of Snow’, what changed the poet’s mood?",
+        options: ["Snowfall", "Cawing of a crow", "Falling snow from hemlock", "A memory"],
+        answer: 2,
+        explanation: "The falling snow from a hemlock tree changed the poet’s mood, signifying hope."
+      },
+      {
+        question: "What did the seagull’s family do to make him fly?",
+        options: ["Left him alone", "Scolded him", "Flew around him", "Tempted him with food"],
+        answer: 3,
+        explanation: "His family tempted him with food to encourage his first flight."
+      },
+      {
+        question: "What is the theme of 'Amanda'?",
+        options: ["Freedom and imagination", "Education", "Discipline", "Responsibility"],
+        answer: 0,
+        explanation: "Amanda imagines being free from nagging and rules, showing her longing for freedom."
+      },
+      {
+        question: "Why did the narrator in 'The Midnight Visitor' feel nervous?",
+        options: ["A criminal escaped", "Ausable wasn’t alert", "A spy entered with a gun", "The lights went off"],
+        answer: 2,
+        explanation: "He was frightened when the enemy spy Max broke in with a gun."
+      },
+      {
+        question: "Why was Matilda unhappy in 'The Necklace'?",
+        options: ["She was poor", "She lacked beauty", "She longed for luxury", "She lost her necklace"],
+        answer: 2,
+        explanation: "She always wanted a lavish life and was dissatisfied with her modest means."
+      },
+      {
+        question: "In 'Animals', what quality of animals does the poet admire?",
+        options: ["Laziness", "Peacefulness and honesty", "Appearance", "Greedlessness"],
+        answer: 1,
+        explanation: "The poet admires their calmness and absence of hypocrisy."
+      },
+      {
+        question: "How does Griffin escape after setting the landlord’s house on fire?",
+        options: ["Turns invisible", "Runs away", "Changes disguise", "Flies away"],
+        answer: 0,
+        explanation: "He uses his invisibility to escape after setting the house on fire."
+      },
+      {
+        question: "What is the irony in 'The Necklace'?",
+        options: ["She lost a costly necklace", "Her friend gave her fake jewelry", "She spent years repaying a fake necklace", "She never found the necklace"],
+        answer: 2,
+        explanation: "The twist is that she worked hard to replace a necklace that was not even real."
+      },
+      {
+        question: "What poetic device is used in 'Fire and Ice'?",
+        options: ["Personification", "Simile", "Symbolism", "Hyperbole"],
+        answer: 2,
+        explanation: "‘Fire’ and ‘Ice’ symbolically represent desire and hatred."
+      },
+      {
+        question: "What makes Ausable different from other secret agents?",
+        options: ["He is fat", "He lives in Paris", "He is calm and intelligent", "He uses weapons"],
+        answer: 2,
+        explanation: "Ausable's cleverness and presence of mind make him stand out."
+      },
+      {
+        question: "What message does 'The Tale of Custard the Dragon' give?",
+        options: ["Cowardice is bad", "Real bravery lies in action", "Animals are strong", "Fantasy is fun"],
+        answer: 1,
+        explanation: "Despite being called a coward, Custard showed real courage during crisis."
+      },
+      {
+        question: "What was the convict’s crime in 'The Bishop’s Candlesticks'?",
+        options: ["Robbery", "Murder", "Betrayal", "Assault"],
+        answer: 0,
+        explanation: "He stole to feed his sick wife but was punished harshly."
+      },
+      {
+        question: "Who helped Griffin after he became invisible?",
+        options: ["No one", "Dr. Kemp", "Mrs. Hall", "Marvel"],
+        answer: 3,
+        explanation: "Marvel helped Griffin initially, before turning against him."
+      },
+      {
+        question: "Why is the poem 'Animals' considered critical of human beings?",
+        options: ["Humans are hypocrites", "Animals are better", "Animals are clean", "None"],
+        answer: 0,
+        explanation: "It shows how animals are free from the flaws humans possess like greed and dishonesty."
+      },
+      {
+        question: "What is the tone of 'For Anne Gregory'?",
+        options: ["Romantic", "Sarcastic", "Didactic", "Philosophical"],
+        answer: 3,
+        explanation: "The poem has a philosophical tone about love beyond physical beauty."
+      },
+      {
+        question: "In 'A Triumph of Surgery', how did Mrs. Pumphrey spoil Tricki?",
+        options: ["Neglect", "Strictness", "Overfeeding and pampering", "Training"],
+        answer: 2,
+        explanation: "She overfed Tricki with sweets, leading to obesity and sickness."
+      }   
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

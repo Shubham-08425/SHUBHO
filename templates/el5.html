@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 mcq Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="emcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 Economics Quiz -  ADVANCE Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+  {
+    question: "Why does disguised unemployment pose a challenge to measuring true employment levels in Indian agriculture?",
+    options: [
+      "It leads to underestimation of agricultural productivity",
+      "Workers appear employed but contribute no marginal output",
+      "It inflates urban unemployment figures",
+      "It includes all seasonal workers as unemployed"
+    ],
+    answer: 1,
+    explanation: "Disguised unemployment refers to workers who are employed but whose marginal productivity is zero or negligible, meaning they don't add to total output but appear as employed."
+  },
+  {
+    question: "How does the Human Development Index (HDI) provide a better measure of economic progress than GDP alone?",
+    options: [
+      "It includes income distribution patterns",
+      "It incorporates income, education, and life expectancy",
+      "It accounts for inflation rates",
+      "It measures only poverty levels"
+    ],
+    answer: 1,
+    explanation: "HDI combines income, education, and life expectancy to provide a holistic view of development, unlike GDP which measures just economic output."
+  },
+  {
+    question: "What is the primary reason behind the slow growth of the manufacturing sector in India despite high economic growth?",
+    options: [
+      "Lack of natural resources",
+      "Inadequate infrastructure and regulatory bottlenecks",
+      "Insufficient consumer demand",
+      "Low labor force participation"
+    ],
+    answer: 1,
+    explanation: "Infrastructure problems, complex regulations, and labor laws restrict manufacturing expansion despite overall economic growth."
+  },
+  {
+    question: "How does inflation affect different income groups in India disproportionately?",
+    options: [
+      "Richer groups suffer more due to fixed incomes",
+      "Poor groups suffer more due to higher spending on essentials",
+      "Inflation benefits all equally",
+      "Only the middle class is affected"
+    ],
+    answer: 1,
+    explanation: "Inflation increases prices of essential goods, which form a larger portion of poor households’ expenditure, reducing their real income more than the rich."
+  },
+  {
+    question: "Why is diversification of income sources important for rural households?",
+    options: [
+      "It helps reduce vulnerability to agricultural risks",
+      "It increases dependency on farming",
+      "It reduces migration to cities",
+      "It decreases total income"
+    ],
+    answer: 0,
+    explanation: "Diversifying income by including non-farm activities reduces risk from crop failures and stabilizes rural incomes."
+  },
+  {
+    question: "What is the major limitation of GDP as an indicator of economic welfare?",
+    options: [
+      "Excludes income from the informal sector",
+      "Does not account for income inequality and non-market activities",
+      "Is difficult to calculate",
+      "Does not measure government spending"
+    ],
+    answer: 1,
+    explanation: "GDP ignores income distribution and unpaid work such as household chores, limiting its usefulness for welfare assessment."
+  },
+  {
+    question: "How does globalization impact the Indian labor market?",
+    options: [
+      "Eliminates all unskilled jobs",
+      "Creates employment opportunities but may displace some workers",
+      "Has no effect on employment",
+      "Only benefits the agricultural sector"
+    ],
+    answer: 1,
+    explanation: "Globalization creates jobs in sectors like IT and services but can displace unskilled workers in traditional industries."
+  },
+  {
+    question: "Why is priority sector lending essential for the Indian economy?",
+    options: [
+      "Ensures credit flow to agriculture, MSMEs and vulnerable sectors",
+      "Reduces interest rates for all loans",
+      "Limits loans to organized sectors",
+      "Promotes foreign investment"
+    ],
+    answer: 0,
+    explanation: "Priority sector lending supports sectors vital for inclusive growth but underserved by banks otherwise."
+  },
+  {
+    question: "What is meant by ‘jobless growth’?",
+    options: [
+      "Economic growth with little or no increase in employment",
+      "Employment growth with no economic growth",
+      "Growth only in agricultural jobs",
+      "Growth limited to rural areas"
+    ],
+    answer: 0,
+    explanation: "‘Jobless growth’ means the economy grows but fails to generate adequate employment opportunities."
+  },
+  {
+    question: "How does the informal sector contribute to the Indian economy?",
+    options: [
+      "Generates high tax revenues",
+      "Provides employment to a large workforce with low capital",
+      "Ensures high wages and job security",
+      "Dominates the service sector"
+    ],
+    answer: 1,
+    explanation: "The informal sector employs a large share of India’s workforce but is characterized by low wages and lack of social security."
+  },
+  {
+    question: "Why is mechanization in agriculture sometimes viewed as a cause of rural unemployment?",
+    options: [
+      "Increases dependence on seasonal labor",
+      "Replaces manual labor leading to job losses",
+      "Requires low capital investment",
+      "Lowers productivity"
+    ],
+    answer: 1,
+    explanation: "Mechanization replaces manual labor which can reduce demand for farm workers and cause unemployment."
+  },
+  {
+    question: "What role do MSMEs play in India's export sector?",
+    options: [
+      "Negligible contribution",
+      "Major contributor providing significant exports",
+      "Only contribute to domestic market",
+      "Limited to raw material production"
+    ],
+    answer: 1,
+    explanation: "MSMEs contribute significantly to India's exports by producing diverse goods and services."
+  },
+  {
+    question: "Why is sustainable development important for India’s economy?",
+    options: [
+      "Focuses solely on economic growth",
+      "Balances economic growth, environment protection and social inclusion",
+      "Promotes rapid industrialization ignoring environment",
+      "Reduces government spending"
+    ],
+    answer: 1,
+    explanation: "Sustainable development ensures that economic growth does not harm environment or social welfare."
+  },
+  {
+    question: "What is the primary challenge in reducing income inequality in India?",
+    options: [
+      "Lack of natural resources",
+      "Unequal access to education, healthcare and opportunities",
+      "Low GDP growth",
+      "High unemployment"
+    ],
+    answer: 1,
+    explanation: "Inequality arises mainly due to uneven access to quality education, healthcare, and jobs."
+  },
+  {
+    question: "How does MGNREGA help in poverty alleviation?",
+    options: [
+      "By guaranteeing minimum wage employment for rural households",
+      "By providing loans to farmers",
+      "By creating urban jobs",
+      "By increasing agricultural output"
+    ],
+    answer: 0,
+    explanation: "MGNREGA guarantees 100 days of wage employment to rural households to improve their livelihood security."
+  },
+  {
+    question: "Why does the manufacturing sector have a multiplier effect on the Indian economy?",
+    options: [
+      "It employs only skilled labor",
+      "It generates demand for raw materials, machinery and services",
+      "It relies solely on exports",
+      "It is limited to large cities"
+    ],
+    answer: 1,
+    explanation: "Manufacturing stimulates other sectors by increasing demand for inputs and services, creating more jobs."
+  },
+  {
+    question: "How can inflation impact economic growth?",
+    options: [
+      "Always promotes growth by increasing demand",
+      "Can reduce growth by eroding purchasing power and investment",
+      "Has no impact on growth",
+      "Only benefits exporters"
+    ],
+    answer: 1,
+    explanation: "High inflation reduces real incomes and can discourage investment, slowing economic growth."
+  },
+  {
+    question: "Which factor is critical for the growth of the service sector in India?",
+    options: [
+      "Abundance of natural resources",
+      "Skilled labor and technological advancements",
+      "Low population",
+      "High tariffs on imports"
+    ],
+    answer: 1}   
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

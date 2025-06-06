@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 MCQ Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="hmcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 HISTORY QUIZE-MEDIUM Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+  {
+    question: " Who was the founder of the Maurya Empire?",
+    options: ["Chandragupta Maurya", "Ashoka", "Bindusara", "Samudragupta"],
+    answer: 0,
+    explanation: "Chandragupta Maurya established the Maurya Empire in 322 BCE, uniting most of India."
+  },
+  {
+    question: " The Battle of Plassey (1757) was fought between which two leaders?",
+    options: ["Nawab Siraj ud-Daulah and Robert Clive", "Tipu Sultan and Lord Cornwallis", "Hyder Ali and Lord Hastings", "Bahadur Shah Zafar and Lord Dalhousie"],
+    answer: 0,
+    explanation: "The Battle of Plassey was between Nawab Siraj ud-Daulah and Robert Clive, leading to British control in Bengal."
+  },
+  {
+    question: " Who wrote the book 'Discovery of India'?",
+    options: ["Jawaharlal Nehru", "Mahatma Gandhi", "Rabindranath Tagore", "Subhas Chandra Bose"],
+    answer: 0,
+    explanation: "'Discovery of India' was written by Jawaharlal Nehru during his imprisonment in 1942-46."
+  },
+  {
+    question: " Which movement started with the slogan 'Do or Die'?",
+    options: ["Non-Cooperation Movement", "Quit India Movement", "Civil Disobedience Movement", "Swadeshi Movement"],
+    answer: 1,
+    explanation: "The Quit India Movement (1942) led by Gandhi used the slogan 'Do or Die' to demand British withdrawal."
+  },
+  {
+    question: " The Rowlatt Act of 1919 aimed to:",
+    options: ["Give Indians more rights", "Suppress revolutionary activities", "Promote education reforms", "Allow free press"],
+    answer: 1,
+    explanation: "The Rowlatt Act gave the British government powers to imprison without trial, to curb revolutionary activities."
+  },
+  {
+    question: " Who was the last Governor-General of independent India?",
+    options: ["Lord Mountbatten", "C. Rajagopalachari", "Rajendra Prasad", "Dr. B.R. Ambedkar"],
+    answer: 1,
+    explanation: "C. Rajagopalachari was the last Governor-General of independent India (1948-50)."
+  },
+  {
+    question: " The main objective of the Simon Commission was to:",
+    options: ["Draft the Indian Constitution", "Report on constitutional reforms", "Promote Indian industries", "Start education reforms"],
+    answer: 1,
+    explanation: "Simon Commission (1927) was set up to report on constitutional reforms but had no Indian members."
+  },
+  {
+    question: " Which of these was NOT a feature of the Indus Valley Civilization?",
+    options: ["Urban planning", "Use of iron tools", "Drainage system", "Standardized weights and measures"],
+    answer: 1,
+    explanation: "Iron tools were not used in Indus Valley Civilization; they primarily used bronze and copper."
+  },
+  {
+    question: " Who was known as the 'Grand Old Man of India'?",
+    options: ["Bal Gangadhar Tilak", "Dadabhai Naoroji", "Gopal Krishna Gokhale", "Lala Lajpat Rai"],
+    answer: 2,
+    explanation: "Gopal Krishna Gokhale was known as the 'Grand Old Man of India' for his moderate politics."
+  },
+  {
+    question: "The Khilafat Movement was launched to support:",
+    options: ["Ottoman Caliphate", "Indian National Congress", "British Crown", "Russian Revolution"],
+    answer: 0,
+    explanation: "The Khilafat Movement aimed to protect the Ottoman Caliphate after WWI."
+  },
+  {
+    question: " Which British policy led to the Partition of Bengal in 1905?",
+    options: ["Divide and Rule", "Economic Drain", "Racial Discrimination", "Land Revenue Policy"],
+    answer: 0,
+    explanation: "The Partition of Bengal was part of 'Divide and Rule' to weaken nationalist movements."
+  },
+  {
+    question: " The famous slogan 'Inquilab Zindabad' was popularized by:",
+    options: ["Bhagat Singh", "Subhas Chandra Bose", "Mahatma Gandhi", "Jawaharlal Nehru"],
+    answer: 0,
+    explanation: "'Inquilab Zindabad' (Long live the revolution) was popularized by Bhagat Singh."
+  },
+  {
+    question: " The main cause of the Revolt of 1857 was:",
+    options: ["Religious and cultural insensitivity", "Economic prosperity", "British withdrawal", "Indian industrialization"],
+    answer: 0,
+    explanation: "Religious/cultural insensitivity (like use of cartridges rumored to be greased with cow/pig fat) was a key cause."
+  },
+  {
+    question: " Which Mughal ruler built the Taj Mahal?",
+    options: ["Akbar", "Jahangir", "Shah Jahan", "Aurangzeb"],
+    answer: 2,
+    explanation: "Shah Jahan built the Taj Mahal in memory of his wife Mumtaz Mahal."
+  },
+  {
+    question: " The main aim of the Swadeshi Movement was:",
+    options: ["Promote foreign goods", "Boycott British goods", "Increase British imports", "Promote British culture"],
+    answer: 1,
+    explanation: "The Swadeshi Movement encouraged Indians to boycott British goods and use Indian-made products."
+  },
+  {
+    question: " Who was the first Indian woman to become the president of the Indian National Congress?",
+    options: ["Sarojini Naidu", "Annie Besant", "Indira Gandhi", "Kasturba Gandhi"],
+    answer: 0,
+    explanation: "Sarojini Naidu was the first Indian woman president of the INC in 1925."
+  },
+  {
+    question: " The Treaty of Srirangapatna (1792) was signed between:",
+    options: ["Tipu Sultan and British East India Company", "Aurangzeb and Marathas", "Akbar and Mughals", "British and French"],
+    answer: 0,
+    explanation: "This treaty ended the Third Anglo-Mysore War; Tipu Sultan lost territory to the British."
+  },
+  {
+    question: " The famous 'Dandi March' was led by:",
+    options: ["Jawaharlal Nehru", "Mahatma Gandhi", "Subhas Chandra Bose", "Bal Gangadhar Tilak"],
+    answer: 1,
+    explanation: "Gandhi led the Dandi March in 1930 to protest the salt tax."
+  },
+  {
+    question: " Who founded the Arya Samaj movement?",
+    options: ["Swami Vivekananda", "Dayananda Saraswati", "Raja Ram Mohan Roy", "Sant Tukaram"],
+    answer: 1,
+    explanation: "Dayananda Saraswati founded the Arya Samaj in 1875 to reform Hinduism."
+  },
+  {
+    question: " The main objective of the Vernacular Press Act (1878) was to:",
+    options: ["Support Indian languages", "Censor Indian-language newspapers", "Promote English education", "Encourage freedom of press"],
+    answer: 1,
+    explanation: "The Vernacular Press Act was introduced to curb the freedom of Indian-language newspapers."
+  }   
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

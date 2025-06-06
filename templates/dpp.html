@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DPP</title>
+<style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="{{ url_for('home') }}">⬅️ Back to Home</a>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9fbfd;
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: #0077cc;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+  }
+  main {
+    flex: 1;
+    width: 95%;
+    max-width: 1000px;
+    margin: 1rem auto 2rem auto;
+  }
+  /* Grid container for features */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 20px;
+  }
+  /* Feature card */
+  .feature-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+    padding: 1.3rem 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+  }
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgb(0 0 0 / 0.15);
+  }
+  .feature-icon {
+    font-size: 3.2rem;
+    margin-bottom: 0.7rem;
+    color: #0077cc;
+  }
+  .feature-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .feature-desc {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  /* Content below grid */
+  #feature-content {
+    margin-top: 2rem;
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    min-height: 280px;
+  }
+
+  /* Sections inside feature content */
+  .content-section {
+    display: none;
+  }
+  .content-section.active {
+    display: block;
+  } dpp
+
+  /* dpp list styling */
+  ul#dpp-list {
+    list-style: none;
+    margin-top: 1rem;
+  }
+  ul#dpp-list li {
+    margin-bottom: 0.7rem;
+  }
+  ul#dpp-list li a {
+    background: #0077cc;
+    color: white;
+    padding: 0.5rem 0.9rem;
+    border-radius: 7px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 600;
+    transition: background 0.3s ease;
+  }
+  ul#dpp-list li a:hover {
+    background: #005fa3
+ }
+</style>
+
+<body>
+<header>DPP-SOLVE</header>
+<main>
+  <div class="features-grid" id="features-grid">
+    <div class="feature-card" data-feature="dpp">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title"> Science dpp</div>
+      <div class="feature-desc">solve and boost progress</div>
+      <a href="dpp.html">dpp</a>
+    </div>
+    <div class="feature-card" data-feature="dpp">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title">Maths dpp</div>
+      <div class="feature-desc">solve and boost progress</div>
+      <a href="dpp.html">dpp</a>
+    </div>
+    <div class="feature-card" data-feature="dpp">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title">History dpp</div>
+      <div class="feature-desc">solve and boost progress</div>
+      <a href="dpp.html">dpp</a>
+    </div>
+    <div class="feature-card" data-feature="dpp">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title"> Civics dpp</div>
+      <div class="feature-desc">solve and boost progress</div>
+      <a href="dpp.html">dpp</a>
+    </div>
+    <div class="feature-card" data-feature="dpp">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title"> Geography dpp</div>
+      <div class="feature-desc">solve and boost progress</div>
+      <a href="dpp.html">dpp</a>
+    </div>
+    <div class="feature-card" data-feature="dpp">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title">Economics dpp</div>
+      <div class="feature-desc">solve and boost progress</div>
+      <a href="dpp.html">dpp</a>
+    </div>
+    <div class="feature-card" data-feature="dpp">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title">English dpp</div>
+      <div class="feature-desc">solve and boost progress</div>
+      <a href="dpp.html">dpp</a>
+    </div>
+    <div class="feature-card" data-feature="dpp">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title">Hindi dpp</div>
+      <div class="feature-desc">solve and boost progress</div>
+      <a href="dpp.html">dpp</a>
+    </div>
+    <div class="feature-card" data-feature="dpp">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title">Sanskrit dpp</div>
+      <div class="feature-desc">solve and boost progress</div>
+      <a href="dpp.html">dpp</a>
+    </div>
+</main>

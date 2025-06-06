@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback-Shubho</title>
+  <style>
+    body {
+      background: #29c2d6;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    .feedback-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #091be4;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 300px;
+      height: 200px;
+      padding: 20px;
+      font-size: 16px;
+      border: 5px solid #ccc;
+      border-radius: 10px;
+      resize: none;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #1410e5;
+      color: rgb(243, 242, 246);
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+    }
+
+    .message {
+      color: rgb(11, 227, 11);
+      margin-top: 15px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 5px;
+      background-color: #1cdb0e;
+      color: white;
+      padding: 14px 14px;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 19px;
+    }
+
+    .back-button:hover {
+      background-color: #16e824;
+    }
+  </style>
+</head>
+<body>
+
+<a href="{{ url_for('home') }}">⬅️ Back to Home</a>
+
+<div class="feedback-box">
+  <h2>Write Your Feedback</h2>
+  <form id="feedbackForm">
+    <textarea id="feedback" placeholder="Type your feedback here..." required></textarea><br>
+    <button type="submit">Submit</button>
+    <div class="message" id="successMsg"></div>
+  </form>
+</div>
+
+<script>
+  document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const feedbackText = document.getElementById("feedback").value.trim();
+
+    if (feedbackText === "") {
+      alert("Please write some feedback.");
+      return;
+    }
+
+    // Simulate successful submission
+    document.getElementById("successMsg").textContent = "✅ Feedback submitted successfully!";
+
+    // Clear the form
+    document.getElementById("feedback").value = "";
+
+    // Redirect after 1 seconds
+    setTimeout(() => {
+      window.location.href = "index.html";  // Replace with your actual thank you or homepage URL
+    }, 1000);
+  });
+</script>
+
+</body>
+</html>

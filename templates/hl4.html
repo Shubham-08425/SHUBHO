@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 MCQ Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="hmcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 HISTORY Quiz -HARD Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+ {
+    question: " The British decision to annex Awadh in 1856 was primarily justified using which doctrine?",
+    options: [
+      "Doctrine of Paramountcy",
+      "Doctrine of Lapse",
+      "Subsidiary Alliance",
+      "Doctrine of Conquest"
+    ],
+    answer: 0,
+    explanation: "The Doctrine of Paramountcy was used to annex Awadh on the grounds of misgovernance, although the Doctrine of Lapse applied only to princely states without a direct heir."
+  },
+  {
+    question: " Who among the following was NOT part of the extremist faction in the Indian National Congress?",
+    options: [
+      "Bal Gangadhar Tilak",
+      "Bipin Chandra Pal",
+      "Gopal Krishna Gokhale",
+      "Lala Lajpat Rai"
+    ],
+    answer: 2,
+    explanation: "Gopal Krishna Gokhale was a moderate leader who advocated gradual reforms, unlike the extremists who demanded more radical actions."
+  },
+  {
+    question: "The Vernacular Press Act (1878) was enacted to curb the influence of:",
+    options: [
+      "English language newspapers",
+      "Indian language newspapers critical of British rule",
+      "Religious publications",
+      "Foreign journals"
+    ],
+    answer: 1,
+    explanation: "The Vernacular Press Act targeted Indian-language newspapers which criticized British policies and fomented nationalist sentiments."
+  },
+  {
+    question: "The Revolt of 1857 saw the first large-scale use of which weapon by Indian soldiers against the British?",
+    options: [
+      "Muskets",
+      "Enfield Rifles",
+      "Bows and Arrows",
+      "Cannon Artillery"
+    ],
+    answer: 1,
+    explanation: "The Enfield rifle cartridges were rumored to be greased with cow and pig fat, offending Hindu and Muslim soldiers and triggering the revolt."
+  },
+  {
+    question: "The Hunter Commission (1882) was set up to investigate:",
+    options: [
+      "The causes of the Revolt of 1857",
+      "The Ilbert Bill controversy",
+      "The atrocities during the 1880 tribal uprisings",
+      "The events of the First Partition of Bengal"
+    ],
+    answer: 2,
+    explanation: "The Hunter Commission investigated the British administration’s handling of tribal rebellions in the Chota Nagpur area."
+  },
+  {
+    question: " The 'Age of Consent Act' (1891) in India was aimed at:",
+    options: [
+      "Raising the legal age of marriage for girls",
+      "Restricting child labor",
+      "Banning sati",
+      "Abolishing child widowhood"
+    ],
+    answer: 0,
+    explanation: "The Act raised the minimum age of consent for girls from 10 to 12 years, addressing issues of early child marriage."
+  },
+  {
+    question: "Which of the following statements about the Dandi March (1930) is TRUE?",
+    options: [
+      "It was a protest against the salt tax only.",
+      "It lasted exactly 24 days covering 300 miles.",
+      "It was the first time Gandhi adopted satyagraha.",
+      "It directly resulted in India gaining independence."
+    ],
+    answer: 0,
+    explanation: "The Dandi March was a symbolic act of civil disobedience focused on opposing the salt tax imposed by the British."
+  },
+  {
+    question: " The Treaty of Allahabad (1765) gave the British East India Company:",
+    options: [
+      "Diwani rights to collect revenue from Bengal, Bihar, and Orissa",
+      "Control over Mysore",
+      "Complete sovereignty over India",
+      "Military alliance with the Marathas"
+    ],
+    answer: 0,
+    explanation: "The treaty granted the Company the right to collect revenue (Diwani) from Bengal, Bihar, and Orissa after defeating Siraj ud-Daulah."
+  },
+  {
+    question: " The main difference between the 'Moderates' and 'Extremists' in the early Indian National Congress was:",
+    options: [
+      "Moderates wanted immediate independence, extremists wanted gradual reforms",
+      "Moderates wanted dialogue with British, extremists supported mass agitation",
+      "Moderates supported armed revolt, extremists favored peaceful protest",
+      "Moderates worked only in urban areas, extremists in rural"
+    ],
+    answer: 1,
+    explanation: "Moderates believed in petitions and dialogue; extremists demanded direct action and mass protest against colonial rule."
+  },
+  {
+    question: " The slogan 'Swaraj is my birthright and I shall have it' was popularized by:",
+    options: [
+      "Mahatma Gandhi",
+      "Subhas Chandra Bose",
+      "Bal Gangadhar Tilak",
+      "Bhagat Singh"
+    ],
+    answer: 2,
+    explanation: "Bal Gangadhar Tilak used this slogan to inspire Indians to demand self-rule (Swaraj) through assertive nationalism."
+  },
+  {
+    question: " Which princely state did NOT join the Indian Union immediately after independence in 1947?",
+    options: [
+      "Hyderabad",
+      "Jammu and Kashmir",
+      "Sikkim",
+      "Manipur"
+    ],
+    answer: 0,
+    explanation: "Hyderabad initially resisted joining India, leading to police action (Operation Polo) in 1948."
+  }, 
+  {
+    question: " The Rowlatt Act (1919) allowed the British government to:",
+    options: [
+      "Imprison suspects without trial",
+      "Grant self-rule to Indians",
+      "Abolish the salt tax",
+      "Form an Indian legislative assembly"
+    ],
+    answer: 0,
+    explanation: "The Rowlatt Act gave the British government power to detain people suspected of sedition without trial, causing widespread outrage."
+  },
+  {
+    question: " Who led the Peasant Movement in Awadh during 1920s?",
+    options: [
+      "Jatindra Nath Das",
+      "Swami Sahajanand Saraswati",
+      "Bipin Chandra Pal",
+      "Lala Lajpat Rai"
+    ],
+    answer: 1,
+    explanation: "Swami Sahajanand Saraswati was the key leader of the Kisan Sabha movement in Awadh region, mobilizing peasants against landlords."
+  },
+  {
+    question: " The concept of 'Swaraj' as defined by Gandhi emphasized:",
+    options: [
+      "Political freedom only",
+      "Social and economic self-reliance alongside political freedom",
+      "Violent overthrow of British",
+      "Complete Westernization"
+    ],
+    answer: 1,
+    explanation: "Gandhi's Swaraj included self-rule, moral regeneration, and economic self-sufficiency."
+  },
+  {
+    question: " The main outcome of the Simon Commission's visit to India in 1928 was:",
+    options: [
+      "Widespread acceptance of its recommendations",
+      "Boycott and protests because it had no Indian members",
+      "Formation of the Indian National Army",
+      "End of British rule"
+    ],
+    answer: 1,
+    explanation: "The Simon Commission had no Indian members, leading to nationwide protests and the slogan 'Simon Go Back'."
+  },
+  {
+    question: "The 'Cripps Mission' of 1942 proposed:",
+    options: [
+      "Immediate transfer of power to Indians",
+      "Dominion status after WWII with provinces allowed to opt out",
+      "Complete independence immediately",
+      "Divide India into two separate countries"
+    ],
+    answer: 1,
+    explanation: "The Cripps Mission offered dominion status after the war but allowed provinces to opt out, which was rejected by Indian leaders."
+  },
+  {
+    question: " The 'Swadeshi Movement' was launched in response to:",
+    options: [
+      "Partition of Bengal in 1905",
+      "First World War",
+      "The Rowlatt Act",
+      "Salt Tax"
+    ],
+    answer: 0,
+    explanation: "The Swadeshi Movement started after the Partition of Bengal aiming to boycott British goods and promote Indian-made products."
+  },
+  {
+    question: " The primary objective of the Aligarh Movement was:",
+    options: [
+      "To promote Hindu-Muslim unity",
+      "To establish a modern education system for Muslims",
+      "To support British rule",
+      "To organize armed resistance"
+    ],
+    answer: 1,
+    explanation: "The Aligarh Movement, led by Sir Syed Ahmad Khan, aimed at modern education and social reform among Muslims."
+  },
+  {
+    question: " The main feature of the Indian Councils Act 1909 (Morley-Minto Reforms) was:",
+    options: [
+      "Introduction of separate electorates for Muslims",
+      "Complete Indian independence",
+      "Abolition of British governors",
+      "Equal voting rights for all Indians"
+    ],
+    answer: 0,
+    explanation: "The Act introduced separate electorates allowing Muslims to elect their representatives, sowing seeds of communalism."
+  },
+  {
+    question: " The 'Poona Pact' of 1932 was an agreement between:",
+    options: [
+      "Gandhi and Jinnah",
+      "Ambedkar and Gandhi",
+      "Nehru and Patel",
+      "Tilak and Gokhale"
+    ],
+    answer: 1,
+    explanation: "The Poona Pact was an agreement between Dr. B.R. Ambedkar and Mahatma Gandhi to provide reserved seats to depressed classes within the general electorate."
+  }
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

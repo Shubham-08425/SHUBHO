@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 mcq Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="emcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 Economics Quiz -EASY Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+  {
+    question: " What is the main source of income for the rural population in India?",
+    options: ["Agriculture", "Industry", "Banking", "Information Technology"],
+    answer: 0,
+    explanation: "Most of the rural population in India depends on agriculture for their livelihood."
+  },
+  {
+    question: " What is disguised unemployment?",
+    options: [
+      "Unemployment among skilled workers",
+      "More people employed than required",
+      "Seasonal unemployment",
+      "Voluntary unemployment"
+    ],
+    answer: 1,
+    explanation: "Disguised unemployment refers to more people working than actually needed."
+  },
+  {
+    question: "  Which sector does not produce goods?",
+    options: ["Primary", "Secondary", "Tertiary", "Manufacturing"],
+    answer: 2,
+    explanation: "The tertiary sector provides services, not goods."
+  },
+  {
+    question: " What is the main aim of the MGNREGA scheme?",
+    options: [
+      "Provide employment in urban areas",
+      "Provide healthcare",
+      "Provide 100 days of wage employment",
+      "Provide free education"
+    ],
+    answer: 2,
+    explanation: "MGNREGA aims to provide 100 days of wage employment to rural households."
+  },
+  {
+    question: " GDP stands for?",
+    options: [
+      "Gross Domestic Product",
+      "General Domestic Product",
+      "Great Developed Plan",
+      "Gross Demand Percentage"
+    ],
+    answer: 0,
+    explanation: "GDP is the Gross Domestic Product – the total value of goods and services produced."
+  },
+  {
+    question: " Which is an example of a tertiary sector activity?",
+    options: ["Farming", "Weaving", "Transport", "Mining"],
+    answer: 2,
+    explanation: "Transport is a service, hence it is part of the tertiary sector."
+  },
+  {
+    question: " Which sector has the highest employment in India?",
+    options: ["Primary", "Secondary", "Tertiary", "IT sector"],
+    answer: 0,
+    explanation: "The primary sector (agriculture) employs the most people in India."
+  },
+  {
+    question: " Which sector is known as the service sector?",
+    options: ["Primary", "Secondary", "Tertiary", "Public"],
+    answer: 2,
+    explanation: "Tertiary sector provides services and is called the service sector."
+  },
+  {
+    question: " Which of these is not an economic activity?",
+    options: ["Teaching", "Gardening for pleasure", "Banking", "Shopkeeping"],
+    answer: 1,
+    explanation: "Gardening for personal pleasure is not done to earn income, so it's not an economic activity."
+  },
+  {
+    question: " Which organisation classifies the Indian economy into 3 sectors?",
+    options: ["NSSO", "RBI", "SEBI", "UN"],
+    answer: 0,
+    explanation: "NSSO (National Sample Survey Organisation) classifies economic activities into sectors."
+  },
+  {
+    question: " What is underemployment?",
+    options: [
+      "People not willing to work",
+      "People working less than their potential",
+      "People working in foreign countries",
+      "People earning too much"
+    ],
+    answer: 1,
+    explanation: "Underemployment means people working in jobs that do not fully use their skills or time."
+  },
+  {
+    question: " What is the basic problem of an economy?",
+    options: ["Unemployment", "Scarcity", "Inflation", "Recession"],
+    answer: 1,
+    explanation: "Scarcity of resources is the basic economic problem faced by every economy."
+  },
+  {
+    question: " Which is a public sector enterprise?",
+    options: ["Tata Steel", "Reliance", "ONGC", "Infosys"],
+    answer: 2,
+    explanation: "ONGC is a government-owned public sector company."
+  },
+  {
+    question: "Which sector includes manufacturing industries?",
+    options: ["Primary", "Secondary", "Tertiary", "Quaternary"],
+    answer: 1,
+    explanation: "Manufacturing is part of the secondary sector."
+  },
+  {
+    question: "Who is considered unemployed?",
+    options: [
+      "Working in household chores",
+      "Retired person",
+      "Willing to work but not getting job",
+      "Student"
+    ],
+    answer: 2,
+    explanation: "Unemployed person is one who is willing and able to work but does not get a job."
+  },
+  {
+    question: " Which activity is part of primary sector?",
+    options: ["Fishing", "Banking", "Insurance", "Retail"],
+    answer: 0,
+    explanation: "Fishing is a natural resource-based activity – hence primary sector."
+  },
+  {
+    question: " Which of these activities generate income?",
+    options: ["Working as a teacher", "House cleaning at home", "Studying", "Volunteering"],
+    answer: 0,
+    explanation: "Teaching is an economic activity and generates income."
+  },
+  {
+    question: " How is the tertiary sector different?",
+    options: [
+      "It manufactures goods",
+      "It extracts raw material",
+      "It provides services",
+      "It grows crops"
+    ],
+    answer: 2,
+    explanation: "Tertiary sector provides services unlike primary/secondary sectors."
+  },
+  {
+    question: " What is the major problem of Indian farmers?",
+    options: ["Lack of market", "Lack of employment", "Lack of irrigation", "Lack of skill"],
+    answer: 2,
+    explanation: "Irrigation is a major challenge in Indian agriculture."
+  },
+  {
+    question: "Which program aims to remove poverty?",
+    options: ["PMGSY", "MGNREGA", "RTI", "Digital India"],
+    answer: 1,
+    explanation: "MGNREGA helps by providing employment and reducing rural poverty."
+  }   
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

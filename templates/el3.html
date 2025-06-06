@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 mcq Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="emcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 Economics Quiz -TOUGH Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+ {
+        question: "Which sector transformation is a key indicator of economic development in India?",
+        options: ["Primary to Secondary", "Primary to Tertiary", "Secondary to Primary", "Tertiary to Primary"],
+        answer: 1,
+        explanation: "A shift from Primary to Tertiary sector reflects better services, indicating economic development."
+      },
+      {
+        question: "What is the main reason for disguised unemployment in agriculture?",
+        options: ["Lack of skills", "Low wages", "More workers than needed", "Seasonal variation"],
+        answer: 2,
+        explanation: "Disguised unemployment means more workers than required; marginal productivity becomes zero."
+      },
+      {
+        question: "Which organization in India calculates the GDP?",
+        options: ["SEBI", "CBI", "NSSO", "CSO"],
+        answer: 3,
+        explanation: "Central Statistics Office (CSO) is responsible for calculating national income including GDP."
+      },
+      {
+        question: "In which sector are most people employed in India, though it contributes less to GDP?",
+        options: ["Primary", "Secondary", "Tertiary", "Private"],
+        answer: 0,
+        explanation: "Primary sector employs the majority but contributes the least in GDP percentage."
+      },
+      {
+        q: "What is the aim of MGNREGA 2005?",
+        options: [
+          "To provide permanent jobs in urban areas",
+          "To provide 100 days of wage employment",
+          "To offer free education",
+          "To support industries financially"
+        ],
+        answer: 1,
+        explanation: "MGNREGA ensures 100 days of wage employment to rural households annually."
+      },
+      {
+        question: "Which of the following is not a feature of the organized sector?",
+        options: ["Regular working hours", "Job security", "Extra work without pay", "Paid leaves"],
+        answer: 2,
+        explanation: "Organized sector ensures paid overtime; extra work without pay is not its feature."
+      },
+      {
+        question: "Which sector does a software engineer working in TCS belong to?",
+        options: ["Primary", "Secondary", "Tertiary", "Unorganized"],
+        answer: 2,
+        explanation: "Providing IT services falls under the tertiary or service sector."
+      },
+      {
+        question: "Which of the following is a major issue in the unorganized sector?",
+        options: ["Job security", "Paid holidays", "Social benefits", "Irregular income"],
+        answer: 3,
+        explanation: "Workers in unorganized sector often suffer from irregular income and job insecurity."
+      },
+      {
+        question: "What is underemployment?",
+        options: ["Working full time", "Earning high wages", "Working in low-skill jobs despite qualifications", "None of these"],
+        answer: 2,
+        explanation: "Underemployment means not utilizing full potential or qualification of a worker."
+      },
+      {
+        question: "Which sector includes activities like banking, transport, education?",
+        options: ["Primary", "Secondary", "Tertiary", "Organized"],
+        answer: 2,
+        explanation: "All service-related jobs fall under the tertiary sector."
+      },
+      {
+        question: "GDP stands for?",
+        options: ["Gross Domestic Product", "Global Domestic Product", "Gross Demand Price", "Government Domestic Policy"],
+        answer: 0,
+        explanation: "GDP means Gross Domestic Product — the value of all goods/services produced in a country."
+      },
+      {
+        question: "When is a person considered unemployed?",
+        options: ["When not willing to work", "When working part-time", "When not getting work despite being willing and able", "When on leave"],
+        answer: 2,
+        explanation: "Unemployment is defined as someone able and willing to work but unable to find a job."
+      },
+      {
+        question: "What is the contribution of tertiary sector in India’s GDP?",
+        options: ["Less than 20%", "Around 25%", "More than 50%", "Around 10%"],
+        answer: 2,
+        explanation: "Tertiary sector contributes more than 50% in India's GDP."
+      },
+      {
+        question: "Which of these are included in the secondary sector?",
+        options: ["Farming", "Fishing", "Manufacturing", "Banking"],
+        answer: 2,
+        explanation: "Secondary sector includes industries and manufacturing processes."
+      },
+      {
+        question: "Which term describes growth without job creation?",
+        options: ["Inclusive Growth", "Jobless Growth", "Sustainable Growth", "Unbalanced Growth"],
+        answer: 1,
+        explanation: "When GDP increases without proportionate employment, it is called jobless growth."
+      },
+      {
+        question: "Which policy supports small-scale farmers financially in India?",
+        options: ["NEP", "NITI Aayog", "PM-KISAN", "Make in India"],
+        answer: 2,
+        explanation: "PM-KISAN provides income support to small/marginal farmers."
+      },
+      {
+        question: "What is the major cause for poverty in rural India?",
+        options: ["Low population", "Lack of technology", "Lack of productive employment", "Urban migration"],
+        answer: 2,
+        explanation: "Main cause of rural poverty is lack of employment and income-generating opportunities."
+      },
+      {
+        question: "Which scheme aims to ensure skill development in youth?",
+        options: ["PM-KISAN", "Skill India", "MGNREGA", "Start-up India"],
+        answer: 1,
+        explanation: "Skill India mission helps in skilling youth for better employment."
+      },
+      {
+        question: "Which of these is a characteristic of the formal sector?",
+        options: ["No job contract", "Government regulation", "Low pay", "Self-employed"],
+        answer: 1,
+        explanation: "Formal sector is regulated by government and follows rules/laws."
+      },
+      {
+        question: "Which is the most appropriate development indicator?",
+        options: ["Income only", "Life expectancy only", "HDI", "Number of vehicles"],
+        answer: 2,
+        explanation: "HDI includes income, education and life expectancy — a composite development index."
+      }   
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

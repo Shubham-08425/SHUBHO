@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 mcq Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="cmcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 CIVICS Quiz -hard Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+    {
+   question: " What is the main aim of democracy?",
+        options: [
+          "To give equal rights to all citizens",
+          "To empower only the majority",
+          "To suppress minority rights",
+          "To ensure one-party rule"
+        ],
+        answer: 0,
+        explanation: "Democracy primarily aims to give equal rights to all citizens irrespective of religion, caste, or community."
+      },
+      {
+        question: " What is 'federalism'?",
+        options: [
+          "Centralized government system",
+          "Power sharing between central and state governments",
+          "Government controlled by one party",
+          "System where states have no autonomy"
+        ],
+        answer: 1,
+        pyq: "CBSE 2018",
+        explanation: "Federalism is a system where power is divided between central and regional (state) governments."
+      },
+      {
+        question: " The Indian Constitution provides for:",
+        options: [
+          "A unitary system of government",
+          "A federal system of government with a strong central government",
+          "A confederation",
+          "No clear system"
+        ],
+        answer: 1,
+        pyq: "CBSE 2017",
+        explanation: "India follows a federal system but with a strong central government to maintain unity."
+      },
+      {
+        question: " Which constitutional amendment gave constitutional status to Panchayati Raj institutions?",
+        options: [
+          "42nd Amendment",
+          "44th Amendment",
+          "73rd Amendment",
+          "86th Amendment"
+        ],
+        answer: 2,
+        pyq: "CBSE 2016",
+        explanation: "The 73rd Amendment in 1992 gave constitutional recognition to Panchayati Raj institutions."
+      },
+      {
+        question: " Which of the following is NOT a feature of democracy?",
+        options: [
+          "Regular elections",
+          "Multiparty system",
+          "Suppression of opposition",
+          "Equality before law"
+        ],
+        answer: 2,
+        pyq: "CBSE 2020",
+        explanation: "Democracy ensures opposition rights, not their suppression."
+      },
+      {
+        question: " What is the role of the Election Commission in India?",
+        options: [
+          "Conduct elections impartially",
+          "Make laws",
+          "Form government",
+          "Adjudicate disputes"
+        ],
+        answer: 0,
+        pyq: "CBSE 2018",
+        explanation: "The Election Commission conducts free and fair elections impartially."
+      },
+      {
+        question: " What is a coalition government?",
+        options: [
+          "Government formed by a single party",
+          "Government formed by an alliance of parties",
+          "Government ruled by military",
+          "Government ruled by judiciary"
+        ],
+        answer: 1,
+        pyq: "CBSE 2019",
+        explanation: "Coalition government means parties come together to form government when no single party gets majority."
+      },
+      {
+        question: " What does the term 'secularism' mean in Indian democracy?",
+        options: [
+          "State religion is Hinduism",
+          "Equal respect to all religions by the state",
+          "No religion allowed",
+          "Preference to minority religions"
+        ],
+        answer: 1,
+        pyq: "CBSE 2017",
+        explanation: "Indian secularism means the state respects and treats all religions equally."
+      },
+      {
+        question: " The Directive Principles of State Policy are:",
+        options: [
+          "Justiciable laws",
+          "Non-justiciable guidelines",
+          "Fundamental Rights",
+          "Judicial orders"
+        ],
+        answer: 1,
+        pyq: "CBSE 2016",
+        explanation: "Directive Principles guide the state in policymaking but are not enforceable by courts."
+      },
+      {
+        question: " The system of separation of powers is meant to:",
+        options: [
+          "Concentrate power",
+          "Avoid concentration of power",
+          "Empower judiciary only",
+          "Empower executive only"
+        ],
+        answer: 1,
+        pyq: "CBSE 2020",
+        explanation: "Separation of powers avoids misuse of power by dividing government functions."
+      },
+      {
+        question: " Which one of the following is a fundamental right?",
+        options: [
+          "Right to property",
+          "Right to freedom of speech",
+          "Directive Principles",
+          "Reservation in jobs"
+        ],
+        answer: 1,
+        pyq: "CBSE 2018",
+        explanation: "Right to freedom of speech is a fundamental right guaranteed by the Constitution."
+      },
+      {
+        question: " What is the tenure of the Lok Sabha?",
+        options: [
+          "4 years",
+          "5 years",
+          "6 years",
+          "Until dissolved"
+        ],
+        answer: 1,
+        pyq: "CBSE 2017",
+        explanation: "The Lok Sabha has a tenure of 5 years unless dissolved sooner."
+      },
+      {
+        question: " The Prime Minister is appointed by:",
+        options: [
+          "President",
+          "Parliament",
+          "Supreme Court",
+          "Chief Justice"
+        ],
+        answer: 0,
+        pyq: "CBSE 2019",
+        explanation: "The President appoints the Prime Minister, usually the leader of the majority party."
+      },
+      {
+        question: " Who among the following can dissolve the Lok Sabha?",
+        options: [
+          "Prime Minister",
+          "President",
+          "Supreme Court",
+          "Speaker of Lok Sabha"
+        ],
+        answer: 1,
+        pyq: "CBSE 2016",
+        explanation: "The President has the power to dissolve the Lok Sabha."
+      },
+      {
+        question: " The concept of 'judicial review' allows the judiciary to:",
+        options: [
+          "Make laws",
+          "Amend the constitution",
+          "Review laws and strike down unconstitutional ones",
+          "Execute laws"
+        ],
+        answer: 2,
+        pyq: "CBSE 2018",
+        explanation: "Judicial review ensures that laws conflicting with the Constitution can be invalidated."
+      },
+      {
+        question: " What does the 'Right to Information Act' ensure?",
+        options: [
+          "Citizens' right to government information",
+          "Government secrecy",
+          "Control of media by government",
+          "Right to privacy"
+        ],
+        answer: 0,
+        pyq: "CBSE 2019",
+        explanation: "RTI Act empowers citizens to access government-held information."
+      },
+      {
+        question: " What is the main purpose of the Panchayati Raj system?",
+        options: [
+          "Centralized governance",
+          "Decentralization and local self-government",
+          "Military rule",
+          "Judicial control"
+        ],
+        answer: 1,
+        pyq: "CBSE 2017",
+        explanation: "Panchayati Raj promotes decentralization by empowering local governance."
+      },
+      {
+        question: " Which one is NOT a function of political parties?",
+        options: [
+          "Forming government",
+          "Opposing government",
+          "Conducting elections",
+          "Putting forward policies"
+        ],
+        answer: 2,
+        pyq: "CBSE 2016",
+        explanation: "Political parties contest elections but do not conduct them."
+      },
+      {
+        question: " The 'Right to Equality' ensures:",
+        options: [
+          "Equal opportunity in employment",
+          "Discrimination based on caste",
+          "No reservation",
+          "Exclusion of minorities"
+        ],
+        answer: 0,
+        pyq: "CBSE 2020",
+        explanation: "Right to Equality prohibits discrimination and ensures equal opportunity."
+      },
+      {
+        question: " The system of 'checks and balances' is designed to:",
+        options: [
+          "Increase power of one branch",
+          "Keep balance and check between government branches",
+          "Limit citizen's rights",
+          "Empower legislature only"
+        ],
+        answer: 1,
+        pyq: "CBSE 2018",
+        explanation: "Checks and balances ensure no branch of government becomes too powerful."
+      }  
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

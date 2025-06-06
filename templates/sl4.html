@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 Science Tough Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="smcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 Science Quiz -HARD Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+  {
+    question: " A convex lens forms a real image of size equal to the object at a distance of 30 cm from the lens. Calculate the focal length of the lens and explain the nature of the image.",
+    options: [
+      "15 cm, real and inverted",
+      "30 cm, real and inverted",
+      "60 cm, virtual and erect",
+      "45 cm, virtual and erect"
+    ],
+    answer: 0,
+    explanation: `Image size = object size means magnification (m) = -1 (real image is inverted)
+Using lens formula and magnification:
+m = v/u = -1 ⇒ v = -u
+Given v = 30 cm (real image), so u = -30 cm
+Using 1/f = 1/v - 1/u = 1/30 - 1/(-30) = 1/30 + 1/30 = 2/30 = 1/15
+⇒ f = 15 cm
+Hence, the focal length is 15 cm and image is real, inverted, and same size as object.`
+  },
+  {
+    question: " Calculate the energy required to convert 10 grams of ice at 0°C completely into water at 0°C. (Latent heat of fusion of ice = 336 J/g)",
+    options: [
+      "3360 J",
+      "33600 J",
+      "336 J",
+      "33.6 J"
+    ],
+    answer: 0,
+    explanation: `Energy required Q = mass × latent heat of fusion
+= 10 g × 336 J/g = 3360 J`
+  },
+  {
+    question: " The molecular formula of a hydrocarbon is C₃H₆. It is found to undergo addition reaction with bromine water. Identify the type of hydrocarbon and explain the reaction involved.",
+    options: [
+      "Alkane, substitution reaction",
+      "Alkene, addition reaction",
+      "Alkyne, addition reaction",
+      "Alkane, addition reaction"
+    ],
+    answer: 1,
+    explanation: `C₃H₆ follows the formula CₙH₂ₙ, indicating it is an alkene.
+Alkenes have a carbon-carbon double bond and undergo addition reactions where bromine adds across the double bond, decolorizing bromine water.
+Thus, it is an alkene undergoing addition reaction.`
+  },
+  {
+    question: " In the electrolysis of acidified water, 4 faradays of charge are passed. Calculate the volume of hydrogen gas produced at STP. (1 faraday = 96500 C, 1 mole gas at STP = 22.4 L)",
+    options: [
+      "44.8 L",
+      "22.4 L",
+      "11.2 L",
+      "5.6 L"
+    ],
+    answer: 0,
+    explanation: `At cathode: 2H⁺ + 2e⁻ → H₂ gas
+4 faradays means 4 moles of electrons.
+For every mole of H₂, 2 moles electrons are required.
+So, moles of H₂ produced = 4/2 = 2 moles.
+Volume = 2 × 22.4 = 44.8 L`
+  },
+  {
+    question: " Explain why sodium metal is stored under kerosene oil and write its reaction with water.",
+    options: [
+      "To prevent reaction with oxygen; Na + H₂O → NaOH + H₂",
+      "To prevent reaction with moisture; Na + H₂O → NaOH + H₂",
+      "To keep it dry; Na + O₂ → Na₂O",
+      "To prevent burning; Na + H₂O → Na₂O + H₂"
+    ],
+    answer: 1,
+    explanation: `Sodium reacts vigorously with moisture in air and water producing NaOH and hydrogen gas.
+To prevent accidental reaction and keep sodium dry, it is stored under kerosene oil.
+Reaction: 2Na + 2H₂O → 2NaOH + H₂`
+  },
+  {
+    question: " A ray of light passes from air into glass (refractive index = 1.5) at an angle of incidence 60°. Calculate the angle of refraction.",
+    options: [
+      "25.1°",
+      "35.3°",
+      "40°",
+      "45°"
+    ],
+    answer: 1,
+    explanation: `Using Snell's law: n₁ sinθ₁ = n₂ sinθ₂
+Air n₁=1, θ₁=60°, glass n₂=1.5
+sinθ₂ = sin60°/1.5 = 0.866/1.5 = 0.577
+θ₂ = sin⁻¹(0.577) ≈ 35.3°`
+  },
+  {
+    question: " Write the balanced chemical equation for the reaction of ethanoic acid with ethanol in the presence of sulfuric acid and name the product formed.",
+    options: [
+      "CH₃COOH + C₂H₅OH → CH₃COOC₂H₅ + H₂O; Ethyl acetate",
+      "CH₃COOH + C₂H₅OH → C₂H₅COOH + H₂O; Propanoic acid",
+      "CH₃COOH + C₂H₅OH → CH₃CH₂OH + CO₂; Ethanol",
+      "CH₃COOH + C₂H₅OH → C₂H₅COOH + H₂; Propanoic acid"
+    ],
+    answer: 0,
+    explanation: `This is an esterification reaction:
+Ethanoic acid + ethanol → ethyl acetate + water
+CH₃COOH + C₂H₅OH → CH₃COOC₂H₅ + H₂O`
+  },
+  {
+    question: " Why do metals conduct electricity whereas non-metals generally do not?",
+    options: [
+      "Metals have free electrons; non-metals do not",
+      "Metals have ionic bonds; non-metals have covalent bonds",
+      "Metals are solid; non-metals are gases",
+      "Metals have higher melting points"
+    ],
+    answer: 0,
+    explanation: `Metals have free, delocalized electrons that move easily and conduct electricity.
+Non-metals do not have free electrons and hence do not conduct electricity in solid state.`
+  },
+  {
+    question: " Calculate the pH of a solution with hydrogen ion concentration [H⁺] = 1 × 10⁻⁵ M.",
+    options: [
+      "5",
+      "9",
+      "10",
+      "15"
+    ],
+    answer: 0,
+    explanation: `pH = -log[H⁺] = -log(1 × 10⁻⁵) = 5`
+  },
+  {
+    question: " Define osmosis and describe one biological example where osmosis is important.",
+    options: [
+      "Diffusion of solute; absorption of minerals in roots",
+      "Diffusion of solvent through semipermeable membrane; water absorption by root hairs",
+      "Movement of water by active transport; muscle contraction",
+      "Movement of solvent against concentration gradient; photosynthesis"
+    ],
+    answer: 1,
+    explanation: `Osmosis is the movement of solvent molecules from a dilute to a concentrated solution through a semipermeable membrane.
+Example: Water absorption by root hairs in plants through osmosis.`
+  },
+  {
+    question: "In a galvanic cell, explain the role of the salt bridge.",
+    options: [
+      "To complete the electrical circuit and maintain charge neutrality",
+      "To allow electrons to flow from anode to cathode",
+      "To prevent oxidation of electrodes",
+      "To increase voltage"
+    ],
+    answer: 0,
+    explanation: `The salt bridge allows movement of ions to maintain charge balance and completes the circuit without mixing solutions directly.`
+  },
+  {
+    question: " Which of the following is the strongest acid and why? HCl, H₂SO₄, HNO₃, CH₃COOH",
+    options: [
+      "HCl, because it dissociates completely",
+      "H₂SO₄, because it can donate two protons",
+      "HNO₃, because it is a strong oxidizer",
+      "CH₃COOH, because of its stable structure"
+    ],
+    answer: 1,
+    explanation: `H₂SO₄ is the strongest acid because it can donate two protons (diprotic) and dissociates almost completely in aqueous solution.`
+  },
+  {
+    question: " Explain the reason for the rise of temperature in the atmosphere due to increase in greenhouse gases.",
+    options: [
+      "They absorb UV rays",
+      "They absorb infrared radiation and trap heat",
+      "They cause acid rain",
+      "They reflect sunlight"
+    ],
+    answer: 1,
+    explanation: `Greenhouse gases absorb infrared radiation emitted by Earth’s surface, trapping heat and raising atmospheric temperature (greenhouse effect).`
+  },
+  {
+    question: " Explain how the blood circulatory system is a double circulation system in humans.",
+    options: [
+      "Blood passes twice through the heart during one cycle",
+      "Blood flows in one direction only",
+      "Blood mixes in heart chambers",
+      "Blood flows slowly"
+    ],
+    answer: 0,
+    explanation: `In double circulation, blood passes twice through the heart - once to lungs (pulmonary circulation) and once to the body (systemic circulation), ensuring efficient oxygenation.`
+  },
+  {
+    question: " What is the role of auxins in plants? Describe one practical application.",
+    options: [
+      "Promote flowering; fruit ripening",
+      "Inhibit growth; leaf fall",
+      "Promote cell elongation; rooting of plant cuttings",
+      "Promote seed dispersal; photosynthesis"
+    ],
+    answer: 2,
+    explanation: `Auxins promote cell elongation and are used commercially to induce rooting in plant cuttings and prevent premature fruit drop.`
+  },
+  {
+    question: " How does the atomic number and mass number change in alpha decay?",
+    options: [
+      "Atomic number decreases by 2; mass number decreases by 4",
+      "Atomic number increases by 2; mass number increases by 4",
+      "Atomic number decreases by 1; mass number unchanged",
+      "Atomic number unchanged; mass number decreases by 4"
+    ],
+    answer: 0,
+    explanation: `In alpha decay, an alpha particle (2 protons + 2 neutrons) is emitted, so atomic number decreases by 2 and mass number by 4.`
+  },
+  {
+    question: " Calculate the resistance of a wire of length 2 m and area of cross-section 0.5 mm², if its resistivity is 1.6 × 10⁻⁸ Ω·m.",
+    options: [
+      "6.4 × 10⁻⁸ Ω",
+      "6.4 × 10⁻² Ω",
+      "6.4 Ω",
+      "64 Ω"
+    ],
+    answer: 1,
+    explanation: `R = ρL/A
+Area in m² = 0.5 × 10⁻⁶ m²
+R = (1.6 × 10⁻⁸)(2) / (0.5 × 10⁻⁶) = 6.4 × 10⁻² Ω`
+  },
+  {
+    question: " Which hormone controls the glucose level in human blood and how?",
+    options: [
+      "Insulin lowers blood glucose by converting it to glycogen",
+      "Glucagon lowers blood glucose by breaking glycogen",
+      "Insulin increases blood glucose by glycogen breakdown",
+      "Adrenaline lowers blood glucose"
+    ],
+    answer: 0,
+    explanation: `Insulin helps lower blood glucose by promoting conversion of glucose into glycogen in the liver.`
+  },
+  {
+    question: " What is the electronic configuration of an atom with atomic number 17 Which is CHLORINE",
+    options: ["2,8,4","2,8,5","2,8,6","2,8,7"],
+    answers: 3,
+    explanation:"2,8,7 is the electronic configuration of chlorine because it complete k,l,m valence shell."
+  },
+  {
+   question: "Which process releases carbon dioxide in large amount?",
+        options: ["Photosynthesis", "Combustion of fuels", "Transpiration", "Respiration only"],
+        answer: 1,
+       explanation:"combustion of fuel is an exothermic reaction in which large amoumt of heat, co2and light evolves."
+  } 
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>

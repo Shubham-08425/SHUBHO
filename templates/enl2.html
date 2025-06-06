@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBSE Class 10 mcq Quiz</title>
+  <style>
+    .congrats {
+      font-size: 50px;
+      color: #e80707;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left:5px;
+      background-color: #1fdf3cf6;
+      color: white;
+      padding: 14px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 19px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #d90a0a;
+    }
+ </style>
+ </head>
+<a href="enmcq.html" class="back-button">🔙 Back</a> <!-- Change 'index.html' to your homepage -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d4dc5f;
+      color: #010006;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-size: 18px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background: #e0f7fa;
+      border-color: #03f0d4;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .timer {
+      float: right;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .submit-btn {
+      background: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+    }
+    .symbol {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .correct { color: rgb(7, 237, 7); }
+    .wrong { color: red; }
+    .theme-toggle {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #2196f3;
+    }
+    .review-box {
+      background: #fff3cd;
+      border-left: 5px solid #ff9800;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .review-button {
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .review-button.selected {
+      background: #ffa726;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 ENGLISH Quiz -MEDIUM Level</h1>
+<div class="theme-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Theme</div>
+<div class="quiz-box">
+  <div id="quiz">
+    <div class="timer" id="timer">⏰ 60s</div>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div class="review-box">
+      <button class="review-button" onclick="toggleReview()" id="reviewBtn">🔖 Mark for Review</button>
+    </div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅️ Back</button>
+      <button onclick="nextQuestion()">Next ➡️</button>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+  <div class="results" id="results" style="display:none;"></div>
+</div>
+<script>
+const questions = [
+      { question: "Why did the postmaster weep after reading Lencho's second letter?", options: ["He was proud of helping Lencho.", "He realized Lencho suspected his honesty.", "He was deeply moved by Lencho's devotion.", "He wanted to send more money."], answer: 1, explanation: "Lencho suspected the post office employees of stealing part of the money, which made the postmaster weep." },
+      { question: "In 'The Hack Driver', how was the narrator fooled by Oliver Lutkins?", options: ["He was misled to a different village.", "Lutkins pretended to be Bill, the hack driver.", "He bribed the narrator.", "He sent a look-alike in his place."], answer: 1, explanation: "Lutkins himself posed as Bill and drove the narrator around, preventing him from meeting 'Lutkins'." },
+      { question: "What symbolic value do the 'footprints without feet' hold in the story?", options: ["The cleverness of the police", "The mystery of human nature", "The supernatural abilities of Griffin", "The invisibility paradox and human fear"], answer: 3, explanation: "The footprints symbolize the invisible man's eerie presence and create suspense and fear." },
+      { question: "What lesson does Bholi's story convey regarding education and dignity?", options: ["Education helps in scoring good marks.", "It enables women to become financially stable.", "Education empowers individuals to stand against injustice.", "Dignity can be bought with wealth."], answer: 2, explanation: "Bholi stood up for her dignity and rejected an unfair marriage, showing the power of education." },
+      { question: "What is ironic about the title 'A Letter to God'?", options: ["God directly answers Lencho.", "Lencho writes to a human thinking it's God.", "The people who help are mistaken as thieves.", "It shows blind faith in an invisible power."], answer: 2, explanation: "Lencho believed God sent the money, unaware it was the post office staff, whom he suspects of theft." },
+      { question: "In 'Nelson Mandela', what does 'the greatest wealth of a nation is its people' signify?", options: ["Population brings power.", "People are the true strength in a just society.", "Leadership matters more.", "Wealth can be created by laws."], answer: 1, explanation: "Mandela emphasizes that a nation's value lies in its people's potential and unity." },
+      { question: "Why was the young seagull afraid to fly initially?", options: ["He lacked training.", "He feared his wings wouldn't support him.", "He wanted his mother to push him.", "He disliked flying."], answer: 1, explanation: "His fear stemmed from self-doubt about his ability to fly." },
+      { question: "How did Matilda Loisel’s pride lead to her downfall in 'The Necklace'?", options: ["She refused to return the necklace.", "She pretended to be rich and lost everything.", "She stole the necklace.", "She didn't ask for help."], answer: 1, explanation: "Matilda’s false pride and desire to appear wealthy caused her years of hardship after losing the necklace." },
+      { question: "Why is the poem 'Dust of Snow' a symbol of hope?", options: ["It shows the harshness of winter.", "It brings a sudden change in mood.", "It speaks about death.", "It reflects loneliness."], answer: 1, explanation: "The crow and hemlock symbolize negativity, but the snow changes the speaker’s mood positively." },
+      { question: "What is the significance of the title 'The Ball Poem'?", options: ["It’s about losing toys.", "A metaphor for learning about loss.", "It shows how to play.", "It's about physical games."], answer: 1, explanation: "The lost ball teaches the child about responsibility and the emotional experience of loss." },
+      { question: "Why did Griffin set fire to the landlord's house in 'Footprints Without Feet'?", options: ["He hated the landlord.", "He wanted to disappear into the crowd.", "He wanted revenge.", "He wanted to erase his traces."], answer: 3, explanation: "Griffin set fire to remove all evidence of his stay and research." },
+      { question: "In 'A Triumph of Surgery', what lesson does Tricki’s transformation teach us?", options: ["Animals should eat chocolates.", "Love equals overfeeding.", "Balanced care is better than overindulgence.", "Surgery solves all issues."], answer: 2, explanation: "Mrs. Pumphrey’s pampering harmed Tricki. A healthy routine cured him." },
+      { question: "In 'The Proposal', what social satire is Chekhov presenting?", options: ["Love marriage vs arranged marriage", "Property disputes in the name of marriage", "Family bonding", "Russian culture"], answer: 1, explanation: "The play mocks how property disputes overpower love in arranged marriages." },
+      { question: "What does the poet wish in 'Fire and Ice'?", options: ["Fire and Ice must coexist.", "Either desire or hatred could end the world.", "Nature controls humans.", "Only hatred survives."], answer: 1, explanation: "The poet believes both desire (fire) and hatred (ice) can equally destroy the world." },
+      { question: "Why was Hari Singh grateful in 'The Thief’s Story'?", options: ["He was given money.", "He was taught how to cook.", "He was trusted despite his crime.", "He escaped the police."], answer: 2, explanation: "Anil's kindness reformed Hari Singh without punishment, teaching him honesty." },
+      { question: "Why did Wanda leave school in 'The Hundred Dresses'?", options: ["She got a scholarship.", "She was often teased by classmates.", "She moved to another town.", "She failed in drawing."], answer: 1, explanation: "Wanda left due to the humiliation she faced about her appearance and name." },
+      { question: "What literary device is used in 'Amanda!' to show contrast between reality and imagination?", options: ["Metaphor", "Irony", "Juxtaposition", "Simile"], answer: 2, explanation: "The poem contrasts Amanda’s dreamy world with her nagging reality, showing irony." },
+      { question: "How is 'Animals' a critique of human society?", options: ["It shows animals are violent.", "It compares animals' honesty to human hypocrisy.", "It promotes veganism.", "It blames nature for wars."], answer: 1, explanation: "The poet admires animals for their simplicity and lack of greed and criticism." },
+      { question: "What is the turning point in 'The Midnight Visitor'?", options: ["Ausable's calmness and fake story of the balcony.", "Presence of police.", "Arrival of Fowler.", "Presence of real balcony."], answer: 0, explanation: "Ausable’s intelligence and story about the balcony tricks Max, leading to his downfall." },
+      { question: "What theme does 'From the Diary of Anne Frank' portray?", options: ["Importance of war", "Fear of dictatorship", "Power of expression and isolation", "Dream of a young girl"], answer: 2, explanation: "Anne Frank’s diary reflects her emotional depth, inner struggles, and need for expression." }  
+]
+
+let current = 0;
+let selected = new Array(questions.length).fill(null);
+let review = new Array(questions.length).fill(false);
+let timer;
+let timeLeft = 60;
+let totalTime = 0;
+let questionTimes = new Array(questions.length).fill(0);
+
+function toggleReview() {
+  review[current] = !review[current];
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function loadQuestion() {
+  if (current >= questions.length) return;
+  clearInterval(timer);
+  timeLeft = 60;
+  document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏰ ${timeLeft}s`;
+    if (timeLeft === 0) nextQuestion();
+  }, 1000);
+
+  const q = questions[current];
+  document.getElementById("question").innerText = `Q${current + 1}. ${q.question}`;
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    if (selected[current] === i) div.classList.add("selected");
+    div.innerText = opt;
+    div.onclick = () => {
+      selected[current] = i;
+      loadQuestion();
+    };
+    optionsBox.appendChild(div);
+  });
+
+  document.getElementById('reviewBtn').classList.toggle('selected', review[current]);
+}
+
+function nextQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  }
+}
+
+function prevQuestion() {
+  questionTimes[current] += (60 - timeLeft);
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function submitQuiz() {
+  clearInterval(timer);
+  questionTimes[current] += (60 - timeLeft);
+  totalTime = questionTimes.reduce((a, b) => a + b, 0);
+  document.getElementById("quiz").style.display = "none";
+  const resultBox = document.getElementById("results");
+  resultBox.style.display = "block";
+
+  let correct = 0, wrong = 0;
+  let html = "<h2>Quiz Results</h2>";
+  questions.forEach((q, i) => {
+    html += `<p><strong>Q${i + 1}:</strong> ${q.question}<br>`;
+    q.options.forEach((opt, j) => {
+      const selectedIndex = selected[i];
+      let symbol = "";
+      if (selectedIndex === j && j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      else if (selectedIndex === j && j !== q.answer) symbol = '<span class="symbol wrong">❌</span>';
+      else if (j === q.answer) symbol = '<span class="symbol correct">✅</span>';
+      html += `- ${opt} ${symbol}<br>`;
+    });
+    html += `<em>Explanation:</em> ${q.explanation}<br>`;
+    html += `<em>Time Spent:</em> ${questionTimes[i]}s`;
+    if (review[i]) html += ` <span class="symbol">🔖 Marked for Review</span>`;
+    html += `</p>`;
+    if (selected[i] === q.answer) correct++;
+    else if (selected[i] !== null) wrong++;
+  });
+
+  const attempted = selected.filter(x => x !== null).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  html += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+  html += `<p><strong>Correct:</strong> ${correct}</p>`;
+  html += `<p><strong>Wrong:</strong> ${wrong}</p>`;
+  html += `<p><strong>Attempted:</strong> ${attempted}</p>`;
+  html += `<p><strong>Score:</strong> ${percent}%</p>`;
+  html += `<p><strong>Total Time Taken:</strong> ${totalTime} seconds</p>`;
+
+  if (percent >= 90) html += `<h3>🎉 Congratulations!</h3>`;
+  else if (percent >= 50) html += `<h3>👍 Good Job!</h3>`;
+  else html += `<h3>🔄 Needs Improvement</h3>`;
+
+  resultBox.innerHTML = html;
+}
+
+window.onload = loadQuestion;
+</script>
+</body>
+</html>
